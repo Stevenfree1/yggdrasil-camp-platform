@@ -1,0 +1,1198 @@
+// Camp Platform: member, season, and operations management for a Burning Man theme camp
+// Single-camp schema for a ~130-165 member Burning Man theme camp
+// PostgreSQL + Prisma | UUIDs | All amounts in cents
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ═══════════════════════════════════════════════
+// ENUMS
+// ═══════════════════════════════════════════════
+
+enum MemberRole {
+  LEAD
+  MANAGER
+  /// Reaches the admin shell but carries no blanket rights of its own —
+  /// everything a STAFF member can do comes from adminScopes.
+  STAFF
+  MEMBER
+}
+
+/// Per-area admin grants, layered on top of role. Additive: a scope never
+/// removes anything a LEAD or MANAGER already has.
+enum AdminScope {
+  INVENTORY
+  SHIFTS
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NON_BINARY
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+enum SeasonMemberStatus {
+  INTERESTED
+  MAYBE
+  CONFIRMED
+  WAITLISTED
+  CANCELLED
+}
+
+enum HousingType {
+  TENT
+  SHIFTPOD
+  RV
+  TRAILER
+  DORM
+  SHARED
+  HEXAYURT
+  OTHER
+}
+
+enum GridPower {
+  NONE
+  AMP_15
+  AMP_30
+  AMP_50
+}
+
+enum TravelMode {
+  CAR
+  RV
+  CARPOOL
+  FLYING
+  BURNER_EXPRESS
+  OTHER
+}
+
+enum RideStatus {
+  HAVE_ROOM // driving with spare seats / cargo space
+  NEED_RIDE // looking for a ride in
+  SORTED // travel covered, nothing to offer or ask
+}
+
+enum TravelWindow {
+  MORNING
+  AFTERNOON
+  EVENING
+  NIGHT
+}
+
+enum PreApprovalForm {
+  YES
+  MAYBE
+  NO
+}
+
+enum PaymentType {
+  DUES
+  GRID
+  FOOD
+  DONATION
+  RV_VOUCHER
+  BEER_FUND
+  TENT
+  TICKET
+  STRIKE_DONATION
+  FUNDRAISING
+  OTHER
+}
+
+enum PaymentMethod {
+  VENMO
+  ZELLE
+  CASH
+  ACH
+  CARD
+  PAYPAL
+  OTHER
+}
+
+enum DuesStatus {
+  UNPAID
+  PAID
+  WAIVED
+}
+
+enum ChargeStatus {
+  OPEN
+  PAID
+  VOID
+}
+
+enum ChargeSource {
+  SELF // member added it to their own tab
+  ADMIN // assigned by an admin
+}
+
+enum TicketType {
+  DGS
+  ART_CAR
+  BOOFER
+  STEWARD
+  OTHER
+}
+
+enum TicketStatus {
+  INVITED // on the DGS working list, not yet contacted
+  CONTACTED // camp has reached out
+  PURCHASED_CONFIRMED // they actually bought the ticket
+  VEHICLE_PASS_CONFIRMED // also claimed a vehicle pass
+  REMOVED // dropped from the list
+  GOT_OUTSIDE // got a ticket through other sources (Got Tix tab)
+}
+
+enum TicketSource {
+  DGS_DIRECT // added directly to the DGS working list
+  WAITLIST_FULFILLED // moved up from the waitlist
+  OUTSIDE_SALE // got tix outside the DGS process
+}
+
+enum InventoryCategory {
+  SHADE
+  TENT
+  AC_UNIT
+  MATTRESS
+  COT
+  KITCHEN
+  BIKE
+  RUG
+  CONTAINER
+  GENERATOR
+  TOOLS
+  ELECTRICAL
+  SOUND
+  DECOR
+  FURNITURE
+  CONSUMABLES
+  OTHER
+}
+
+enum InventoryRequestCategory {
+  AC
+  MATTRESS
+  COT
+  TENT
+  BIKE
+  OTHER
+}
+
+enum InventoryRequestStatus {
+  REQUESTED
+  APPROVED
+  FULFILLED
+  DENIED
+}
+
+enum BudgetCategory {
+  GENERATOR
+  FUEL
+  STORAGE
+  TRUCKS
+  SOUND
+  FOOD
+  CONTAINERS
+  BATHROOMS
+  WATER
+  GREY_WATER
+  SHOWERS
+  DECORATION
+  TRASH
+  SUPPLIES
+  ART
+  INFRASTRUCTURE
+  MISC
+}
+
+enum ShiftAssignmentStatus {
+  ASSIGNED
+  CONFIRMED
+  COMPLETED
+  NO_SHOW
+}
+
+enum ApplicationExperience {
+  FIRST_TIMER
+  BEEN_BEFORE
+  VETERAN
+}
+
+enum ApplicationStatus {
+  // Legacy values (predating Phase A pipeline). New code defaults to SUBMITTED.
+  PENDING
+  REVIEWED
+  // Phase A pipeline stages.
+  SUBMITTED
+  UNDER_REVIEW
+  PRE_APPROVED
+  APPROVED
+  INVITED
+  ACCEPTED
+  DUES_PAID
+  CONFIRMED
+  WAITLISTED
+  DECLINED
+  REJECTED // legacy alias for DECLINED
+  WITHDRAWN
+}
+
+enum ApplicationSource {
+  NATIVE_FORM // submitted via /apply on the site
+  GOOGLE_FORM_IMPORT // synced from external Google Form
+  ADMIN_ENTRY // manually added by an admin
+  HISTORICAL_IMPORT // bulk import from prior-season data
+}
+
+enum AnnouncementPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum LodgingUnitKind {
+  TENT
+  RV
+  SHIFTPOD
+  TRAILER
+  DORM
+  STRUCTURE // shade, kitchen, lounge — non-sleeping label
+  BOUNDARY // camp perimeter
+  STREET_LABEL // text-only label, no body
+  POWER_BOX // power distribution point
+  SHADE_SAIL // triangular shade structure
+  TEXT_LABEL // free-floating text annotation
+  CONTAINER // 20-ft ISO shipping container (rotation = door orientation)
+  DINING_TENT // Moroccan caidal tent, 6x12 m
+  BOX_TRUCK // 26-ft box truck, ~33 ft overall
+  MAHAL_TENT // Lotus Belle Mahal, trefoil plan
+  CANOPY // steel-frame fabric canopy/carport (CoverPro, Costco 10x20)
+  SHADE_CLOTH // aluminet panel laid over an area, semi-transparent
+  BIKE_PARKING // marked bike area; sized to fit, usually drawn semi-transparent
+  WATER_TANK // round poly water tank; 1100 gal is ~6.5 ft across
+  POD // one sleeping compartment inside a trailer (Tierra/Aire/Fuego run I-V)
+  HITCH // small tongue marking a trailer's front end
+  // Power plugs: connection points for the CES order. Only rendered when the
+  // map's Power layer is on — they are the electrician's view, not the camp's.
+  PLUG_15A
+  PLUG_30A
+  PLUG_50A
+  PLUG_L21_30
+}
+
+enum MapColorMode {
+  HOUSEHOLD
+  GRID_POWER
+}
+
+/// Which transactional template an EmailLog row corresponds to.
+enum EmailType {
+  WELCOME
+  WELCOME_BACK
+  PROFILE_SETUP
+  APPLICATION_CONFIRMATION
+  APPLICATION_APPROVED
+  APPLICATION_DENIED
+  PRE_APPROVAL_DUES
+  PRE_APPROVAL_EXPIRED
+  PASSWORD_RESET
+  INVITE
+  MEMBERSHIP_REMINDER
+  DUES_INCREASE_REMINDER
+  DONATION_RECEIPT
+  MASS_EMAIL
+  OTHER
+}
+
+enum EmailStatus {
+  SENT // accepted by the transport
+  FAILED // transport raised an error
+  LOGGED_ONLY // no transport configured (dev / log-only mode)
+}
+
+// ═══════════════════════════════════════════════
+// CORE MODELS
+// ═══════════════════════════════════════════════
+
+/// A person who is or was a camp member. Persists across seasons.
+model Member {
+  id                    String     @id @default(uuid())
+  email                 String     @unique
+  previousEmails        String[]   @default([]) // historical / alternate emails for identity match
+  passwordHash          String?
+  name                  String
+  playaName             String?
+  phone                 String?
+  gender                Gender?
+  role                  MemberRole @default(MEMBER)
+  adminScopes           AdminScope[] @default([])
+  isActive              Boolean    @default(true)
+  emailVerified         Boolean    @default(false)
+  hasAvatar             Boolean    @default(false)
+  emergencyContactName  String?
+  emergencyContactPhone String?
+  dietaryRestrictions   String? // dietary preferences: vegan, vegetarian, gluten-free, etc.
+  allergies             String? // safety-critical food allergies (nuts, shellfish, etc.)
+  notes                 String? // Admin notes
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+
+  seasonMembers         SeasonMember[]
+  avatar                MemberAvatar?
+  tickets               Ticket[]
+  waitlistEntries       WaitlistEntry[]
+  announcements         Announcement[]
+  auditLogs             AuditLog[]
+  applicationsSponsored Application[]   @relation("ApplicationSponsor")
+  applicationsReviewed  Application[]   @relation("ApplicationReviewer")
+  emailsReceived        EmailLog[]      @relation("EmailRecipient")
+  emailsTriggered       EmailLog[]      @relation("EmailTriggeredBy")
+
+  @@index([role])
+  @@index([isActive])
+  @@map("members")
+}
+
+/// 1:1 profile photo for a Member, stored in Postgres. Kept out of the hot
+/// members row (see Member.hasAvatar) so list queries never fetch the bytes.
+model MemberAvatar {
+  memberId  String   @id
+  mimeType  String // always image/webp after sharp processing
+  data      Bytes // ~512px square WebP, ~40 KB
+  updatedAt DateTime @updatedAt
+  member    Member   @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@map("member_avatars")
+}
+
+/// Burning Man season (one per year)
+model Season {
+  id             String    @id @default(uuid())
+  year           Int       @unique
+  name           String // e.g. "2026"
+  isActive       Boolean   @default(false)
+  duesAmount     Int // In cents, e.g. 120000 = $1,200
+  gridFee30amp   Int // In cents
+  gridFee50amp   Int // In cents
+  startDate      DateTime? // Burn event start
+  endDate        DateTime? // Burn event end
+  buildStartDate DateTime? // Build week start
+  strikeEndDate  DateTime? // Strike end
+  capacity       Int? // soft warning threshold for total confirmed members
+  /// Shifts each member is expected to sign up for.
+  minShiftsPerMember Int     @default(2)
+  /// Members cannot claim or release until Ali opens signup.
+  shiftSignupOpen    Boolean @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  seasonMembers      SeasonMember[]
+  tickets            Ticket[]
+  waitlistEntries    WaitlistEntry[]
+  buildDays          BuildDay[]
+  strikeAssignments  StrikeAssignment[]
+  earlyArrivalPasses EarlyArrivalPass[]
+  expenses           Expense[]
+  budgetLines        BudgetLine[]
+  shifts             Shift[]
+  shiftBlocks        ShiftBlock[]
+  applications       Application[]
+  households         Household[]
+  lodgingUnits       LodgingUnit[]
+  mapConfig          SeasonMapConfig?
+  mapVersions        LodgingMapVersion[]
+  chargeItems        ChargeItem[]
+
+  @@index([isActive])
+  @@map("seasons")
+}
+
+/// A member's participation in a specific season -- the central junction table
+model SeasonMember {
+  id       String             @id @default(uuid())
+  seasonId String
+  memberId String
+  status   SeasonMemberStatus @default(INTERESTED)
+
+  // Housing
+  housingType  HousingType?
+  housingSize  String? // e.g. "10x12", "25ft"
+  sharedWithId String? // Another SeasonMember (couples/shared housing)
+
+  // Grid / Power
+  gridPower GridPower @default(NONE)
+
+  // Logistics
+  arrivalDate     DateTime?
+  departureDate   DateTime?
+  rideDetails     String?
+  travelMode      TravelMode?
+  rideStatus      RideStatus?
+  arrivalWindow   TravelWindow? // rough time of day, optional
+  departureWindow TravelWindow?
+  travelUpdatedAt DateTime? // set when the member submits the portal travel form (unlocks the wallpaper gift)
+  preApprovalForm PreApprovalForm?
+  mapObject       String? // Grid placement reference
+  specialRequests String?
+
+  // Crew flags
+  buildCrew       Boolean @default(false)
+  strikeCrew      Boolean @default(false)
+  isCampVirgin    Boolean @default(false) // first year with this camp
+  isBMVirgin      Boolean @default(false)
+  addedToWhatsApp Boolean @default(false)
+
+  // Dues / Activation (membership status, decoupled from the application funnel)
+  duesStatus        DuesStatus @default(UNPAID)
+  duesNote          String? // free-text, e.g. "comped — core build crew"
+  duesUpdatedById   String? // Member.id of admin who last set dues (plain string, no FK)
+  duesUpdatedAt     DateTime?
+  duesOverrideCents Int? // custom dues amount; null = use Season.duesAmount
+  activatedAt       DateTime? // null = Invited/never-logged-in; set = Active
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  season            Season             @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  member            Member             @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  sharedWith        SeasonMember?      @relation("SharedHousing", fields: [sharedWithId], references: [id])
+  sharedBy          SeasonMember[]     @relation("SharedHousing")
+  payments          Payment[]
+  charges           Charge[]
+  buildAssignments  BuildAssignment[]
+  strikeAssignment  StrikeAssignment?
+  earlyArrivalPass  EarlyArrivalPass?
+  shiftAssignments  ShiftAssignment[]
+  shiftInstances    ShiftInstance[]
+  inventoryRequests InventoryRequest[]
+  lodgingAssignment LodgingAssignment?
+
+  @@unique([seasonId, memberId])
+  @@index([seasonId])
+  @@index([memberId])
+  @@index([status])
+  @@index([sharedWithId])
+  @@map("season_members")
+}
+
+// ═══════════════════════════════════════════════
+// FINANCIAL
+// ═══════════════════════════════════════════════
+
+/// Individual payment transaction (tracking only, not processing)
+model Payment {
+  id                         String        @id @default(uuid())
+  seasonMemberId             String
+  type                       PaymentType
+  amount                     Int // In cents
+  method                     PaymentMethod
+  paidTo                     String? // Who collected/received the payment
+  paidAt                     DateTime
+  notes                      String?
+  recordedBy                 String? // Admin who entered this record
+  processor                  String? // e.g. STRIPE for automatic reconciliation
+  processorCheckoutSessionId String?       @unique
+  processorPaymentIntentId   String?
+  processorPaymentMethodType String?
+  processorCustomerId        String?
+  chargeId                   String? // links this payment to the charge it cleared (null for dues)
+  feeAmount                  Int? // Processor fee in cents when available
+  netAmount                  Int? // Amount after processor fee in cents when available
+  createdAt                  DateTime      @default(now())
+  updatedAt                  DateTime      @updatedAt
+
+  seasonMember SeasonMember @relation(fields: [seasonMemberId], references: [id], onDelete: Cascade)
+  charge       Charge?      @relation(fields: [chargeId], references: [id], onDelete: SetNull)
+
+  @@index([seasonMemberId])
+  @@index([type])
+  @@index([processor])
+  @@index([processorPaymentIntentId])
+  @@index([paidAt])
+  @@index([method])
+  @@index([chargeId])
+  @@index([seasonMemberId, paidAt])
+  @@index([seasonMemberId, type])
+  @@map("payments")
+}
+
+/// Reusable catalog template a camp offers (e.g. "Tent Power", "RV Fee").
+model ChargeItem {
+  id          String   @id @default(uuid())
+  seasonId    String
+  name        String
+  description String?
+  amountCents Int // default price, in cents
+  selfServe   Boolean  @default(false) // members may add it to their own tab
+  active      Boolean  @default(true) // false = retired/hidden; existing charges keep working
+  sortOrder   Int      @default(0)
+  createdBy   String? // Member.id (plain string, mirrors duesUpdatedById — no FK)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  season  Season   @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  charges Charge[]
+
+  @@index([seasonId])
+  @@index([seasonId, active])
+  @@map("charge_items")
+}
+
+/// One instance of something a specific member owes. Amount/label snapshotted.
+model Charge {
+  id             String       @id @default(uuid())
+  seasonMemberId String
+  itemId         String? // null = free-form one-off
+  label          String // snapshot of item name or free-form label
+  amountCents    Int // snapshot at creation
+  status         ChargeStatus @default(OPEN)
+  source         ChargeSource @default(ADMIN)
+  note           String?
+  createdBy      String? // admin Member.id, or null for member self-serve
+  voidedById     String?
+  voidedAt       DateTime?
+  paidAt         DateTime?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  seasonMember SeasonMember @relation(fields: [seasonMemberId], references: [id], onDelete: Cascade)
+  item         ChargeItem?  @relation(fields: [itemId], references: [id], onDelete: SetNull)
+  payments     Payment[]
+
+  @@index([seasonMemberId])
+  @@index([seasonMemberId, status])
+  @@index([itemId])
+  @@map("charges")
+}
+
+/// Camp expense tracking
+model Expense {
+  id                 String    @id @default(uuid())
+  seasonId           String
+  description        String
+  amount             Int // In cents
+  paidBy             String // Person's name
+  date               DateTime
+  category           String?
+  receiptUrl         String?
+  needsReimbursement Boolean   @default(false)
+  reimbursed         Boolean   @default(false)
+  reimbursedAt       DateTime?
+  notes              String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@index([seasonId])
+  @@index([date])
+  @@index([paidBy])
+  @@index([category])
+  @@index([needsReimbursement, reimbursed])
+  @@index([seasonId, date])
+  @@index([seasonId, category])
+  @@map("expenses")
+}
+
+/// Season budget line items
+model BudgetLine {
+  id              String         @id @default(uuid())
+  seasonId        String
+  category        BudgetCategory
+  description     String?
+  estimatedAmount Int // In cents
+  actualAmount    Int? // In cents
+  notes           String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@unique([seasonId, category])
+  @@index([seasonId])
+  @@map("budget_lines")
+}
+
+// ═══════════════════════════════════════════════
+// TICKETS & PASSES
+// ═══════════════════════════════════════════════
+
+/// DGS ticket allocation per member per season.
+///
+/// Phase E: extended into a lifecycle-aware record. The original boolean
+/// flags (`purchaseConfirmed`, `vehiclePass`) are preserved for back-compat,
+/// but `status` is now the source of truth for the DGS workflow. `memberId`
+/// is nullable so we can record allocations for non-Members (historical
+/// imports, admin-entered names that don't have a Member row yet).
+model Ticket {
+  id                String     @id @default(uuid())
+  seasonId          String
+  memberId          String?
+  type              TicketType @default(DGS)
+  quantity          Int        @default(1)
+  vehiclePass       Boolean    @default(false)
+  purchaseConfirmed Boolean    @default(false)
+  notes             String?
+
+  // Phase E additions
+  status           TicketStatus @default(INVITED)
+  source           TicketSource @default(DGS_DIRECT)
+  contactedAt      DateTime?
+  purchasedAt      DateTime?
+  removedAt        DateTime?
+  fulfilledAt      DateTime?
+  placeholderName  String? // used when memberId is null
+  placeholderEmail String? // lowercased, used for dedup + identity matching
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  season          Season          @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  member          Member?         @relation(fields: [memberId], references: [id], onDelete: SetNull)
+  waitlistEntries WaitlistEntry[] @relation("WaitlistFulfilledBy")
+
+  @@index([seasonId])
+  @@index([memberId])
+  @@index([status])
+  @@index([seasonId, status])
+  @@index([placeholderEmail])
+  @@map("tickets")
+}
+
+/// Waitlist of people who want a DGS ticket but aren't on the working list.
+/// Per-season FIFO-ish queue; fulfilling a waitlist entry creates a Ticket
+/// row with source=WAITLIST_FULFILLED and links back here.
+model WaitlistEntry {
+  id                String    @id @default(uuid())
+  seasonId          String
+  memberId          String? // nullable for non-Members
+  name              String
+  email             String?
+  phone             String?
+  quantityRequested Int       @default(1)
+  position          Int       @default(0)
+  notes             String?
+  fulfilledAt       DateTime?
+  fulfilledTicketId String?
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  season          Season  @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  member          Member? @relation(fields: [memberId], references: [id], onDelete: SetNull)
+  fulfilledTicket Ticket? @relation("WaitlistFulfilledBy", fields: [fulfilledTicketId], references: [id], onDelete: SetNull)
+
+  @@index([seasonId])
+  @@index([memberId])
+  @@index([email])
+  @@index([seasonId, position])
+  @@index([seasonId, email])
+  @@map("waitlist_entries")
+}
+
+/// Early arrival pass allocation
+model EarlyArrivalPass {
+  id             String   @id @default(uuid())
+  seasonId       String
+  seasonMemberId String   @unique // One pass per season member
+  arrivalDate    DateTime
+  passId         String? // Ticket/pass number
+  notes          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  season       Season       @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  seasonMember SeasonMember @relation(fields: [seasonMemberId], references: [id], onDelete: Cascade)
+
+  @@index([seasonId])
+  @@map("early_arrival_passes")
+}
+
+// ═══════════════════════════════════════════════
+// BUILD & STRIKE
+// ═══════════════════════════════════════════════
+
+/// A scheduled build day
+model BuildDay {
+  id        String   @id @default(uuid())
+  seasonId  String
+  date      DateTime
+  name      String // e.g. "Tuesday Build"
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  season      Season            @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  assignments BuildAssignment[]
+
+  @@index([seasonId])
+  @@index([date])
+  @@map("build_days")
+}
+
+/// Member assigned to a build day
+model BuildAssignment {
+  id             String   @id @default(uuid())
+  buildDayId     String
+  seasonMemberId String
+  wapTicketId    String? // WAP/EA ticket identifier
+  team           String? // e.g. "kitchen", "shade", "power", "art car"
+  notes          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  buildDay     BuildDay     @relation(fields: [buildDayId], references: [id], onDelete: Cascade)
+  seasonMember SeasonMember @relation(fields: [seasonMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([buildDayId, seasonMemberId])
+  @@map("build_assignments")
+}
+
+/// Member assigned to strike
+model StrikeAssignment {
+  id             String    @id @default(uuid())
+  seasonId       String
+  seasonMemberId String    @unique // One strike assignment per season member
+  departureDate  DateTime?
+  team           String? // e.g. "moop", "kitchen breakdown", "LA caravan", "Reno storage"
+  notes          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  season       Season       @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  seasonMember SeasonMember @relation(fields: [seasonMemberId], references: [id], onDelete: Cascade)
+
+  @@index([seasonId])
+  @@map("strike_assignments")
+}
+
+// ═══════════════════════════════════════════════
+// INVENTORY
+// ═══════════════════════════════════════════════
+
+/// Camp equipment and supplies
+model InventoryItem {
+  id              String            @id @default(uuid())
+  category        InventoryCategory
+  name            String
+  description     String?
+  quantity        Int               @default(1)
+  dimensions      String?
+  condition       String?
+  storageLocation String?
+  notes           String?
+  /// Soft removal. Archiving is available to INVENTORY scope holders; the hard
+  /// delete stays lead-only, so tidying the list cannot destroy history.
+  archivedAt      DateTime?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  requests InventoryRequest[]
+
+  @@index([category])
+  @@map("inventory_items")
+}
+
+/// Member request for camp equipment
+model InventoryRequest {
+  id              String                   @id @default(uuid())
+  seasonMemberId  String
+  inventoryItemId String? // Nullable - might just be a category request
+  category        InventoryRequestCategory
+  status          InventoryRequestStatus   @default(REQUESTED)
+  notes           String?
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @updatedAt
+
+  seasonMember  SeasonMember   @relation(fields: [seasonMemberId], references: [id], onDelete: Cascade)
+  inventoryItem InventoryItem? @relation(fields: [inventoryItemId], references: [id], onDelete: SetNull)
+
+  @@index([seasonMemberId])
+  @@index([status])
+  @@index([inventoryItemId])
+  @@map("inventory_requests")
+}
+
+// ═══════════════════════════════════════════════
+// SHIFTS
+// ═══════════════════════════════════════════════
+
+/// Volunteer shift definition
+model Shift {
+  id            String   @id @default(uuid())
+  seasonId      String
+  name          String // e.g. "Greeter Shift", "Kitchen Duty"
+  description   String?
+  date          DateTime
+  startTime     String // "10:00"
+  endTime       String // "14:00"
+  maxVolunteers Int?
+  location      String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  season      Season            @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  assignments ShiftAssignment[]
+
+  @@index([seasonId])
+  @@index([date])
+  @@index([seasonId, date])
+  @@map("shifts")
+}
+
+/// Member assigned to a shift
+/// A repeating band of work sharing hours, e.g. "Cleaning/MOOP" 4p-6p.
+model ShiftBlock {
+  id        String @id @default(uuid())
+  seasonId  String
+  name      String
+  startTime String // "16:00"
+  endTime   String // "18:00"
+  notes     String?
+  sortOrder Int    @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  season Season      @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  slots  ShiftSlot[]
+
+  @@index([seasonId])
+  @@map("shift_blocks")
+}
+
+/// A named position inside a block — "Clean Lead", "RV Area - 2". One seat.
+model ShiftSlot {
+  id          String  @id @default(uuid())
+  blockId     String
+  label       String
+  /// Shown to members before they claim, e.g. "must carry a licence".
+  requirement String?
+  sortOrder   Int     @default(0)
+
+  block     ShiftBlock      @relation(fields: [blockId], references: [id], onDelete: Cascade)
+  instances ShiftInstance[]
+
+  @@index([blockId])
+  @@map("shift_slots")
+}
+
+/// One cell of the grid: a slot on a date. Absent row = the block does not run
+/// that day; present with a null seasonMemberId = open.
+model ShiftInstance {
+  id             String    @id @default(uuid())
+  slotId         String
+  date           DateTime
+  seasonMemberId String?
+  claimedAt      DateTime?
+  /// Set when an admin placed someone rather than the member self-signing.
+  assignedById   String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  slot         ShiftSlot     @relation(fields: [slotId], references: [id], onDelete: Cascade)
+  seasonMember SeasonMember? @relation(fields: [seasonMemberId], references: [id], onDelete: SetNull)
+
+  @@unique([slotId, date])
+  @@index([seasonMemberId])
+  @@index([date])
+  @@map("shift_instances")
+}
+
+model ShiftAssignment {
+  id             String                @id @default(uuid())
+  shiftId        String
+  seasonMemberId String
+  status         ShiftAssignmentStatus @default(ASSIGNED)
+  notes          String?
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+
+  shift        Shift        @relation(fields: [shiftId], references: [id], onDelete: Cascade)
+  seasonMember SeasonMember @relation(fields: [seasonMemberId], references: [id], onDelete: Cascade)
+
+  @@unique([shiftId, seasonMemberId])
+  @@map("shift_assignments")
+}
+
+// ═══════════════════════════════════════════════
+// APPLICATIONS & COMMUNICATION
+// ═══════════════════════════════════════════════
+
+/// Membership application. Submitted via /apply or imported from external form.
+/// Phase A: extended with season FK, expanded status pipeline, sponsor/household
+/// links, source tracking for idempotent imports, and stage-transition timestamps.
+model Application {
+  id String @id @default(uuid())
+
+  // Season association (nullable for legacy rows pre-Phase-A; new apps require a season)
+  seasonId String?
+  season   Season? @relation(fields: [seasonId], references: [id])
+
+  // Source tracking
+  source             ApplicationSource @default(NATIVE_FORM)
+  externalResponseId String?           @unique // dedupe for Google Form / 3rd-party imports
+  submittedAt        DateTime          @default(now())
+
+  // Identity
+  name      String
+  email     String
+  phone     String
+  playaName String?
+
+  // Form responses
+  referredBy      String? // free-text from form
+  sponsorMemberId String? // resolved sponsor link, nullable per design decision
+  sponsorMember   Member? @relation("ApplicationSponsor", fields: [sponsorMemberId], references: [id])
+
+  isBurningManFirstTime Boolean?
+  isCampReturning       Boolean? // "have you been with this camp before"
+  hasTicket             Boolean?
+  strikeCommitment      Boolean?
+
+  experience       ApplicationExperience // derived from isBurningManFirstTime + isCampReturning
+  motivationText   String? // "What does the camp mean to you / why join"
+  groupMembersText String? // free-text group affiliation, structured later via Household
+
+  // Legacy / catch-all fields (some form versions collected these)
+  interests             String?
+  contribution          String?
+  dietaryRestrictions   String?
+  emergencyContactName  String?
+  emergencyContactPhone String?
+  housingPreference     String?
+  message               String?
+
+  // Workflow
+  status ApplicationStatus @default(SUBMITTED)
+
+  // Household / group link
+  householdId String?
+  household   Household? @relation(fields: [householdId], references: [id])
+
+  // Review
+  reviewedBy         String? // legacy free-text, retained for backfill
+  reviewedByMemberId String?
+  reviewedByMember   Member?   @relation("ApplicationReviewer", fields: [reviewedByMemberId], references: [id])
+  reviewedAt         DateTime?
+  reviewNotes        String?
+
+  // Stage-transition timestamps (for audit + funnel metrics)
+  preApprovedAt        DateTime?
+  preApprovalExpiresAt DateTime? // dues deadline; overdue unpaid pre-approvals get waitlisted
+  invitedAt            DateTime?
+  acceptedAt           DateTime?
+  duesPaidAt           DateTime?
+  confirmedAt          DateTime?
+  declinedAt           DateTime?
+  withdrawnAt          DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([email])
+  @@index([seasonId, status])
+  @@index([sponsorMemberId])
+  @@index([householdId])
+  @@index([reviewedByMemberId])
+  @@index([preApprovalExpiresAt])
+  @@map("applications")
+}
+
+/// Group of applicants/members who came as a household, share a tent/RV, or
+/// otherwise self-organize as a sub-unit. Per-season (people regroup year to year).
+/// Replaces the 2018-era "Group Name" social-cluster pattern (Dream Team, etc.)
+/// that was lost when the Master Doc structure changed in 2022.
+model Household {
+  id        String   @id @default(uuid())
+  seasonId  String
+  name      String? // optional, e.g. "The Rivera RV" / "Shiftpod Row"
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  season       Season        @relation(fields: [seasonId], references: [id])
+  applications Application[]
+
+  @@index([seasonId])
+  @@map("households")
+}
+
+/// Camp announcements
+model Announcement {
+  id          String               @id @default(uuid())
+  title       String
+  content     String
+  authorId    String
+  priority    AnnouncementPriority @default(NORMAL)
+  isPublished Boolean              @default(true)
+  publishedAt DateTime?
+  expiresAt   DateTime?
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+
+  author Member @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([authorId])
+  @@index([isPublished, expiresAt])
+  @@index([publishedAt])
+  @@map("announcements")
+}
+
+// ═══════════════════════════════════════════════
+// AUDIT LOG
+// ═══════════════════════════════════════════════
+
+/// Tracks admin actions for accountability
+model AuditLog {
+  id         String   @id @default(uuid())
+  memberId   String? // Who performed the action (null for system actions)
+  action     String // e.g. "PAYMENT_RECORDED", "STATUS_CHANGED"
+  entityType String // e.g. "SeasonMember", "Payment"
+  entityId   String
+  details    Json? // Flexible payload with before/after state
+  createdAt  DateTime @default(now())
+
+  member Member? @relation(fields: [memberId], references: [id], onDelete: SetNull)
+
+  @@index([memberId])
+  @@index([entityType, entityId])
+  @@index([action])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+/// One row per outbound transactional email. Written by the email service at
+/// send time so admins can see what was sent to whom, whether it failed, and
+/// (via a self-hosted tracking pixel) whether it was opened.
+model EmailLog {
+  id                  String      @id @default(uuid())
+  to                  String // recipient email address as sent
+  memberId            String? // resolved by matching email OR previousEmails (null if no match)
+  type                EmailType   @default(OTHER)
+  subject             String
+  status              EmailStatus
+  error               String? // transport error message when status = FAILED
+  transport           String // 'smtp' | 'sendgrid' | 'log'
+  triggeredByMemberId String? // admin who initiated the send, when known
+  openedAt            DateTime? // first time the tracking pixel was hit
+  openCount           Int         @default(0)
+  createdAt           DateTime    @default(now())
+
+  member      Member? @relation("EmailRecipient", fields: [memberId], references: [id], onDelete: SetNull)
+  triggeredBy Member? @relation("EmailTriggeredBy", fields: [triggeredByMemberId], references: [id], onDelete: SetNull)
+
+  @@index([memberId])
+  @@index([type])
+  @@index([status])
+  @@index([createdAt])
+  @@index([to])
+  @@map("email_logs")
+}
+
+// ═══════════════════════════════════════════════
+// LODGING MAP (Phase C)
+// ═══════════════════════════════════════════════
+
+/// A rectangular object placed on the season's lodging canvas — tent, RV,
+/// shade structure, partner-camp HUB area, boundary segment, or text label.
+/// Position is stored in feet from the canvas origin; rotation is free.
+model LodgingUnit {
+  id          String          @id @default(uuid())
+  seasonId    String
+  kind        LodgingUnitKind
+  label       String? // free-text override; derived from occupants if null
+  x           Float           @default(0)
+  y           Float           @default(0)
+  w           Float           @default(10)
+  h           Float           @default(10)
+  rotation    Float           @default(0) // degrees, 0 = axis-aligned
+  color       String? // hex override; otherwise derived from color mode
+  partnerCamp String? // for HUB / STRUCTURE units shared with neighbors
+  notes       String?
+  sortOrder   Int             @default(0) // z-index on canvas (higher = on top)
+  opacity     Float           @default(1) // 0..1; <1 lets lower layers show through (e.g. shade)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  season      Season              @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  assignments LodgingAssignment[]
+
+  @@index([seasonId])
+  @@map("lodging_units")
+}
+
+/// Joins a SeasonMember to a LodgingUnit. One member sleeps in at most one unit
+/// per season (enforced by @unique); a unit can hold multiple members.
+model LodgingAssignment {
+  id             String   @id @default(uuid())
+  lodgingUnitId  String
+  seasonMemberId String   @unique
+  isPrimary      Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  lodgingUnit  LodgingUnit  @relation(fields: [lodgingUnitId], references: [id], onDelete: Cascade)
+  seasonMember SeasonMember @relation(fields: [seasonMemberId], references: [id], onDelete: Cascade)
+
+  @@index([lodgingUnitId])
+  @@map("lodging_assignments")
+}
+
+/// Per-season canvas settings: viewport, grid size, color mode. One row per season.
+model SeasonMapConfig {
+  id                String       @id @default(uuid())
+  seasonId          String       @unique
+  viewportX         Float        @default(0)
+  viewportY         Float        @default(0)
+  viewportScale     Float        @default(1.0)
+  gridSizeFt        Float        @default(1.0)
+  colorMode         MapColorMode @default(HOUSEHOLD)
+  backgroundUrl     String? // data URL or hosted URL of reference image (e.g. prior-year layout export)
+  backgroundOpacity Float        @default(0.45)
+  backgroundScale   Float        @default(1.0)
+  backgroundX       Float        @default(0)
+  backgroundY       Float        @default(0)
+  // Degrees clockwise about the image centre. Aerial photos are almost never
+  // shot square to the camp frontage, so a reference image is unusable without
+  // this — scale and offset alone cannot align one.
+  backgroundRotation Float       @default(0)
+  // Locked site frame: a fixed grid area anchored to the bounding streets.
+  siteWidthFt       Float? // plot width in feet (street-to-street across frontage)
+  siteDepthFt       Float? // plot depth in feet (front street to back street)
+  streetTop         String? // street name anchored to the top/front edge (e.g. "Eternal (E)")
+  streetBottom      String? // street name anchored to the bottom/back edge (e.g. "F")
+  frontageBearing   Float? // true bearing (deg) the map-top/frontage faces; drives the wind/sun layer
+  notes             String?
+  updatedAt         DateTime     @updatedAt
+
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@map("season_map_configs")
+}
+
+/// A named snapshot of a season's lodging map (the units as a MapDocument JSON).
+/// Restoring syncs the live units to the snapshot (preserving surviving units'
+/// assignments via an id-matched diff).
+model LodgingMapVersion {
+  id        String   @id @default(uuid())
+  seasonId  String
+  name      String
+  unitCount Int      @default(0)
+  data      Json // serialized MapDocument { units: MapUnit[] }
+  createdAt DateTime @default(now())
+
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@index([seasonId])
+  @@map("lodging_map_versions")
+}
