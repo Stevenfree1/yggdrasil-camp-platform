@@ -1,0 +1,1917 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 9999;
+    padding: 1rem 1.5rem;
+    background-color: var(--color-terracotta);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    transition: none;
+  }
+  .skip-link:focus,
+  .skip-link:focus-visible {
+    left: 1rem;
+    top: 1rem;
+    outline: 3px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  :focus:not(:focus-visible) { outline: none; }
+  :focus-visible { outline: 2px solid var(--color-terracotta); outline-offset: 2px; }
+  a:focus-visible,
+  button:focus-visible { outline: 2px solid var(--color-terracotta); outline-offset: 2px; border-radius: 0.125rem; }
+
+  :root {
+    --color-cream: #FAF7F0;
+    --color-cream-warm: #EFE4D2;
+    --color-ink: #3A211F;
+    --color-ink-rgb: 58, 33, 31;
+    --color-ink-soft: #5B4E43;
+    --color-ink-faint: #7B6755;
+    --color-gold: #B99443;
+    --color-gold-muted: #C49A4D;
+    --color-terracotta: #B96443;
+    --color-terracotta-rgb: 185, 100, 67;
+    --color-gold-rgb: 185, 148, 67;
+    --color-cream-rgb: 250, 247, 240;
+    --color-sage: #8E9A86;
+    --color-sage-soft: #A8B09E;
+    --color-sage-pale: #B7BCA9;
+    --color-sage-rgb: 142, 154, 134;
+    --color-warm-border: #D8C7B1;
+    --color-line-rgb: 216, 199, 177;
+    --color-tan-50: 250, 247, 240;
+    --color-surface: #ffffff;
+    --color-surface-alt: #EFE4D2;
+    --color-success: #2e7d32;
+    --color-warning: #C58B2A;
+    --color-error: #A85C3C;
+    --color-info: #244D61;
+    --section-gap: clamp(40px, 6vh, 72px);
+    --section-gap-sm: clamp(28px, 4vh, 48px);
+    --max-content-width: 1200px;
+  }
+
+  .dark {
+    --color-cream: #1a1f1a;
+    --color-cream-warm: #242a24;
+    --color-ink: #e8e4dc;
+    --color-ink-rgb: 232, 228, 220;
+    --color-ink-soft: #ccc8be;
+    --color-ink-faint: #9a9590;
+    --color-gold: #c4a94d;
+    --color-gold-muted: #b8960c;
+    --color-terracotta: #c47040;
+    --color-terracotta-rgb: 196, 112, 64;
+    --color-gold-rgb: 196, 169, 77;
+    --color-cream-rgb: 26, 31, 26;
+    --color-sage: #7a8e7a;
+    --color-warm-border: #3a3830;
+    --color-line-rgb: 58, 56, 48;
+    --color-tan-50: 26, 31, 26;
+    --color-surface: #222822;
+    --color-surface-alt: #2a302a;
+    --color-success: #4caf50;
+    --color-warning: #e0a82e;
+    --color-error: #e05a4f;
+    --color-info: #5a8fa8;
+  }
+
+  ::selection {
+    background-color: rgba(var(--color-terracotta-rgb), 0.15);
+    color: var(--color-ink);
+  }
+
+  body {
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    letter-spacing: 0.01em;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--color-ink);
+    line-height: 1.15;
+  }
+
+  p {
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    color: var(--color-ink-soft);
+    letter-spacing: 0.01em;
+    line-height: 1.75;
+  }
+
+  /* ============================== */
+  /* Font utility classes            */
+  /* ============================== */
+  .font-display {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .font-accent {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+  .font-editorial {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 0;
+  }
+  .font-body, .font-ui {
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+  }
+
+  .text-eyebrow {
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--color-terracotta);
+  }
+  .text-display-thin {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  .text-display-wide {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .text-body-relaxed {
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+    color: var(--color-ink-soft);
+  }
+  .text-caption {
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+  }
+  .text-optical-h1 {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    letter-spacing: 0;
+    line-height: 1.05;
+  }
+  .text-optical-h2 {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    letter-spacing: 0;
+    line-height: 1.15;
+  }
+  .text-stat-number {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    font-feature-settings: 'tnum' 1;
+    letter-spacing: 0;
+  }
+}
+
+/* Playa Ledger admin/backend theme. Scoped so public pages stay warm and lighter. */
+.admin-ledger {
+  --admin-shell: #17362F;
+  --admin-shell-deep: #102B26;
+  --admin-shell-night: #0B211D;
+  --admin-cover-green: #485C4C;
+  --admin-guide-sage: #677461;
+  --admin-light-sage: #A8B09E;
+  --admin-silver-sage: #B7BCA9;
+  --admin-parchment: #F2E8D8;
+  --admin-parchment-soft: #E9DDC9;
+  --admin-brass: #B88A45;
+  --admin-brass-soft: #C0964B;
+  --admin-faded-ink: #C8C0AD;
+  --admin-ink: #2A211B;
+  --admin-muted: #6B6255;
+  --admin-border: rgba(72, 92, 76, 0.32);
+  --admin-border-dark: rgba(200, 192, 173, 0.18);
+  --admin-warning: #A85C3C;
+
+  --color-cream: var(--admin-parchment);
+  --color-cream-warm: var(--admin-parchment-soft);
+  --color-ink: var(--admin-ink);
+  --color-ink-rgb: 42, 33, 27;
+  --color-ink-soft: var(--admin-muted);
+  --color-ink-faint: #827869;
+  --color-gold: var(--admin-brass);
+  --color-gold-muted: var(--admin-brass-soft);
+  --color-terracotta: var(--admin-warning);
+  --color-terracotta-rgb: 168, 92, 60;
+  --color-gold-rgb: 184, 138, 69;
+  --color-cream-rgb: 242, 232, 216;
+  --color-sage: var(--admin-guide-sage);
+  --color-sage-rgb: 103, 116, 97;
+  --color-warm-border: rgba(72, 92, 76, 0.28);
+  --color-line-rgb: 72, 92, 76;
+  --color-surface: rgba(242, 232, 216, 0.96);
+  --color-surface-alt: rgba(233, 221, 201, 0.9);
+
+  background:
+    linear-gradient(180deg, rgba(11, 33, 29, 0.84), rgba(23, 54, 47, 0.9)),
+    linear-gradient(135deg, rgba(184, 138, 69, 0.1), transparent 44%),
+    url('/images/texture.webp') center / cover fixed,
+    var(--admin-shell);
+  color: var(--admin-ink);
+  font-feature-settings: 'kern' 1, 'tnum' 1;
+  isolation: isolate;
+}
+
+.admin-ledger::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(90deg, rgba(242, 232, 216, 0.22) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(242, 232, 216, 0.16) 1px, transparent 1px),
+    linear-gradient(32deg, transparent 48%, rgba(184, 138, 69, 0.28) 49%, rgba(184, 138, 69, 0.28) 50%, transparent 51%);
+  background-size: 96px 96px, 96px 96px, 168px 168px;
+  mask-image: linear-gradient(90deg, black, transparent 72%);
+}
+
+.admin-ledger::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.075;
+  mix-blend-mode: screen;
+  background-image:
+    repeating-conic-gradient(rgba(242, 232, 216, 0.16) 0% 25%, transparent 0% 50%),
+    repeating-conic-gradient(rgba(184, 138, 69, 0.16) 0% 25%, transparent 0% 50%);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 1px;
+}
+
+.admin-ledger > * {
+  position: relative;
+  z-index: 2;
+}
+
+.admin-ledger .admin-sidebar {
+  width: 17.5rem;
+  background:
+    linear-gradient(180deg, rgba(11, 33, 29, 0.97), rgba(23, 54, 47, 0.96)),
+    url('/images/texture.webp') center / cover,
+    var(--admin-shell);
+  border-right: 1px solid var(--admin-border-dark);
+  box-shadow: 22px 0 60px rgba(7, 22, 19, 0.28);
+}
+
+.admin-ledger .admin-sidebar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  background:
+    linear-gradient(90deg, transparent 0 18px, rgba(200, 192, 173, 0.4) 19px, transparent 20px),
+    linear-gradient(180deg, transparent 0 84px, rgba(184, 138, 69, 0.32) 85px, transparent 86px);
+}
+
+.admin-ledger .admin-sidebar nav a {
+  position: relative;
+  border-radius: 0.375rem;
+  letter-spacing: 0.01em;
+}
+
+.admin-ledger .admin-sidebar nav a::before {
+  content: '';
+  position: absolute;
+  left: -0.55rem;
+  top: 0.55rem;
+  bottom: 0.55rem;
+  width: 2px;
+  background: var(--admin-brass);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.admin-ledger .admin-sidebar nav a.text-gold::before {
+  opacity: 1;
+}
+
+.admin-ledger .admin-topbar {
+  background:
+    linear-gradient(90deg, rgba(11, 33, 29, 0.92), rgba(23, 54, 47, 0.86)),
+    url('/images/texture.webp') center / cover;
+  border-bottom-color: rgba(200, 192, 173, 0.16);
+  box-shadow: 0 14px 36px rgba(7, 22, 19, 0.18);
+}
+
+.admin-ledger .admin-topbar h2,
+.admin-ledger .admin-topbar .text-ink {
+  color: var(--admin-parchment) !important;
+}
+
+.admin-ledger .admin-topbar .text-ink-soft,
+.admin-ledger .admin-topbar button,
+.admin-ledger .admin-topbar a {
+  color: rgba(242, 232, 216, 0.72) !important;
+}
+
+.admin-ledger .admin-topbar button:hover,
+.admin-ledger .admin-topbar a:hover {
+  color: var(--admin-brass-soft) !important;
+}
+
+.admin-ledger .admin-topbar .form-input {
+  background-color: rgba(242, 232, 216, 0.08);
+  border-color: rgba(242, 232, 216, 0.16);
+  color: var(--admin-parchment);
+  box-shadow: none;
+}
+
+.admin-ledger .admin-topbar .form-input option {
+  background-color: var(--admin-parchment);
+  color: var(--admin-ink);
+}
+
+.admin-ledger .admin-topbar .admin-user-menu,
+.admin-ledger .admin-topbar .admin-user-menu button {
+  color: var(--admin-ink) !important;
+}
+
+.admin-ledger .admin-topbar .admin-user-menu .text-ink {
+  color: var(--admin-ink) !important;
+}
+
+.admin-ledger .admin-topbar .admin-user-menu .text-ink-soft {
+  color: var(--admin-muted) !important;
+}
+
+.admin-ledger .admin-topbar .admin-user-menu button:hover {
+  color: var(--admin-shell) !important;
+}
+
+.admin-ledger .admin-content {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(242, 232, 216, 0.92), rgba(233, 221, 201, 0.84)),
+    linear-gradient(135deg, rgba(72, 92, 76, 0.26), rgba(16, 43, 38, 0.34)),
+    url('/images/pattern.webp') center / 520px auto,
+    var(--admin-parchment);
+}
+
+.admin-ledger .admin-content::before {
+  content: '';
+  position: fixed;
+  inset: 4.5rem 0 0 17.5rem;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.12;
+  background:
+    linear-gradient(25deg, transparent 0 42%, rgba(72, 92, 76, 0.7) 42.2%, transparent 42.5%),
+    linear-gradient(155deg, transparent 0 52%, rgba(184, 138, 69, 0.36) 52.2%, transparent 52.5%),
+    linear-gradient(90deg, rgba(72, 92, 76, 0.25) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(72, 92, 76, 0.18) 1px, transparent 1px);
+  background-size: 880px 520px, 760px 460px, 82px 82px, 82px 82px;
+}
+
+.admin-ledger .admin-content > * {
+  max-width: 1480px;
+  margin-inline: auto;
+}
+
+.admin-ledger .luxury-card,
+.admin-ledger .frame-panel {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(248, 240, 226, 0.96), rgba(239, 226, 205, 0.94)),
+    var(--admin-parchment);
+  border-color: var(--admin-border);
+  border-radius: 0.375rem;
+  box-shadow: 0 14px 32px rgba(16, 43, 38, 0.11);
+}
+
+.admin-ledger .luxury-card::before,
+.admin-ledger .frame-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(90deg, transparent, rgba(184, 138, 69, 0.2), transparent),
+    repeating-linear-gradient(0deg, rgba(42, 33, 27, 0.035) 0 1px, transparent 1px 28px);
+  background-size: 100% 1px, 100% 28px;
+  background-position: 0 0, 0 0;
+}
+
+.admin-ledger .luxury-card:hover {
+  transform: none;
+  box-shadow: 0 16px 36px rgba(16, 43, 38, 0.14);
+}
+
+.admin-ledger .luxury-card > *,
+.admin-ledger .frame-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-ledger .form-input {
+  background-color: rgba(248, 241, 229, 0.98);
+  border-color: rgba(72, 92, 76, 0.36);
+  color: var(--admin-ink);
+  border-radius: 0.375rem;
+  min-height: 2.625rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+.admin-ledger .form-input:focus {
+  border-color: var(--admin-brass);
+  box-shadow: 0 0 0 3px rgba(184, 138, 69, 0.16);
+}
+
+.admin-ledger .form-label {
+  color: var(--admin-ink);
+  font-size: 0.8125rem;
+}
+
+.admin-ledger .cta-primary {
+  border: 1px solid rgba(184, 138, 69, 0.56);
+  border-radius: 0.375rem;
+  background: linear-gradient(180deg, #C0964B, #A97735);
+  color: #17120E;
+  box-shadow: 0 10px 22px rgba(90, 58, 20, 0.18);
+}
+
+.admin-ledger .cta-primary::before {
+  background: rgba(16, 43, 38, 0.92);
+}
+
+.admin-ledger .cta-primary:hover {
+  transform: none;
+  color: var(--admin-parchment);
+}
+
+.admin-ledger table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-ledger thead tr {
+  background: rgba(72, 92, 76, 0.11);
+}
+
+.admin-ledger th {
+  color: var(--admin-muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.admin-ledger td {
+  vertical-align: middle;
+}
+
+.admin-ledger tbody tr {
+  background: rgba(248, 241, 229, 0.34);
+}
+
+.admin-ledger tbody tr:hover {
+  background: rgba(168, 176, 158, 0.14);
+}
+
+.admin-ledger select.form-input {
+  padding-right: 2rem;
+}
+
+.admin-ledger .admin-page-header {
+  border: 1px solid rgba(200, 192, 173, 0.18);
+  border-radius: 0.375rem;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  background:
+    linear-gradient(90deg, rgba(16, 43, 38, 0.96), rgba(72, 92, 76, 0.84)),
+    url('/images/texture.webp') center / cover;
+  box-shadow: 0 18px 42px rgba(16, 43, 38, 0.18);
+}
+
+.admin-ledger .admin-page-header h1,
+.admin-ledger .admin-page-header .text-ink {
+  color: var(--admin-parchment) !important;
+}
+
+.admin-ledger .admin-page-header p,
+.admin-ledger .admin-page-header .text-ink-soft {
+  color: rgba(242, 232, 216, 0.7) !important;
+}
+
+.admin-ledger .admin-page-header button:not(.cta-primary),
+.admin-ledger .admin-page-header a:not(.cta-primary) {
+  border-color: rgba(242, 232, 216, 0.18) !important;
+  background-color: rgba(242, 232, 216, 0.08);
+  color: rgba(242, 232, 216, 0.74) !important;
+}
+
+.admin-ledger .admin-page-header button:not(.cta-primary):hover,
+.admin-ledger .admin-page-header a:not(.cta-primary):hover {
+  border-color: rgba(184, 138, 69, 0.42) !important;
+  color: var(--admin-brass-soft) !important;
+}
+
+.admin-ledger .admin-page-kicker {
+  color: var(--admin-brass-soft);
+  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.admin-ledger.admin-login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-ledger .admin-login-shell {
+  display: grid;
+  width: min(1560px, 100%);
+  min-height: min(760px, calc(100vh - 3rem));
+  overflow: hidden;
+  border: 1px solid rgba(200, 192, 173, 0.2);
+  border-radius: 0.375rem;
+  background: rgba(12, 30, 27, 0.42);
+  box-shadow:
+    0 34px 100px rgba(7, 22, 19, 0.46),
+    0 0 0 1px rgba(184, 138, 69, 0.08);
+}
+
+.admin-ledger .admin-login-art {
+  position: relative;
+  display: none;
+  min-height: inherit;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border-right: 1px solid rgba(200, 192, 173, 0.18);
+  background:
+    linear-gradient(90deg, rgba(8, 27, 24, 0.92), rgba(18, 49, 43, 0.82)),
+    url('/images/texture.webp') center / cover;
+  padding: clamp(2.25rem, 4vw, 4rem);
+}
+
+.admin-ledger .admin-login-art::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.42;
+  background:
+    linear-gradient(105deg, transparent 0 54%, rgba(184, 138, 69, 0.32) 54.15%, transparent 54.45%),
+    linear-gradient(25deg, transparent 0 43%, rgba(242, 232, 216, 0.18) 43.15%, transparent 43.45%),
+    linear-gradient(90deg, rgba(242, 232, 216, 0.08) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(242, 232, 216, 0.07) 1px, transparent 1px);
+  background-size: 820px 520px, 720px 420px, 96px 96px, 96px 96px;
+}
+
+.admin-ledger .admin-login-art::after {
+  content: '';
+  position: absolute;
+  right: clamp(2rem, 8vw, 7rem);
+  bottom: 15%;
+  width: min(30vw, 320px);
+  aspect-ratio: 1;
+  transform: rotate(45deg);
+  border: 1px solid rgba(184, 138, 69, 0.35);
+  box-shadow:
+    inset 0 0 0 20px rgba(184, 138, 69, 0.035),
+    inset 0 0 0 21px rgba(242, 232, 216, 0.11);
+  opacity: 0.44;
+}
+
+.admin-ledger .admin-login-seal,
+.admin-ledger .admin-login-copy,
+.admin-ledger .admin-login-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-ledger .admin-login-seal {
+  display: flex;
+  height: 6.5rem;
+  width: 6.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(184, 138, 69, 0.5);
+  background: rgba(8, 27, 24, 0.26);
+  box-shadow: inset 0 0 0 1px rgba(242, 232, 216, 0.06);
+}
+
+.admin-ledger .admin-login-seal::before {
+  content: '';
+  position: absolute;
+  inset: 0.45rem;
+  border: 1px solid rgba(184, 138, 69, 0.22);
+}
+
+.admin-ledger .admin-login-seal span {
+  display: flex;
+  height: 4.75rem;
+  width: 4.75rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-ledger .admin-login-copy {
+  max-width: 650px;
+  padding-block: clamp(2rem, 8vh, 6rem);
+}
+
+.admin-ledger .admin-login-copy h1 {
+  margin-top: 1.15rem;
+  color: var(--admin-parchment);
+  font-size: clamp(4.25rem, 7.2vw, 7rem);
+  line-height: 0.96;
+}
+
+.admin-ledger .admin-login-copy p:not(.admin-page-kicker) {
+  max-width: 36rem;
+  color: rgba(242, 232, 216, 0.68);
+  font-size: clamp(0.95rem, 1.35vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.admin-ledger .admin-login-rule {
+  position: relative;
+  width: min(320px, 48%);
+  height: 1px;
+  margin: 2rem 0 1.4rem;
+  background: linear-gradient(90deg, rgba(184, 138, 69, 0.7), transparent);
+}
+
+.admin-ledger .admin-login-rule::after {
+  content: '';
+  position: absolute;
+  left: 4.5rem;
+  top: 50%;
+  height: 0.55rem;
+  width: 0.55rem;
+  transform: translateY(-50%) rotate(45deg);
+  border: 1px solid rgba(184, 138, 69, 0.72);
+  background: rgba(15, 46, 40, 0.85);
+}
+
+.admin-ledger .admin-login-footer {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  border-top: 1px solid rgba(242, 232, 216, 0.12);
+  padding-top: 1.25rem;
+}
+
+.admin-ledger .admin-login-footer p {
+  color: rgba(242, 232, 216, 0.5);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.admin-ledger .admin-login-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(184, 138, 69, 0.1), transparent 38%),
+    linear-gradient(180deg, rgba(250, 243, 231, 0.98), rgba(232, 219, 199, 0.96)),
+    url('/images/texture.webp') center / cover;
+  padding: clamp(1.5rem, 4vw, 4rem);
+}
+
+.admin-ledger .admin-login-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background:
+    linear-gradient(90deg, rgba(72, 92, 76, 0.2) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(72, 92, 76, 0.14) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.admin-ledger .admin-login-panel::after {
+  content: '';
+  position: absolute;
+  right: -5rem;
+  top: -4rem;
+  width: 18rem;
+  aspect-ratio: 1;
+  transform: rotate(45deg);
+  border: 1px solid rgba(184, 138, 69, 0.18);
+  opacity: 0.7;
+}
+
+.admin-ledger .admin-login-mobile-brand,
+.admin-ledger .admin-login-card,
+.admin-ledger .admin-login-links {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-ledger .admin-login-mobile-brand {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.admin-ledger .admin-login-mobile-brand > div {
+  display: inline-flex;
+  height: 4.5rem;
+  width: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(184, 138, 69, 0.4);
+  background: rgba(184, 138, 69, 0.1);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.18);
+}
+
+.admin-ledger .admin-login-card {
+  width: min(100%, 450px);
+  margin-inline: auto;
+  overflow: hidden;
+  border: 1px solid rgba(72, 92, 76, 0.28);
+  border-radius: 0.375rem;
+  background:
+    linear-gradient(180deg, rgba(250, 244, 233, 0.94), rgba(238, 226, 206, 0.9)),
+    var(--admin-parchment);
+  padding: clamp(1.5rem, 3vw, 2.35rem);
+  box-shadow:
+    0 24px 54px rgba(42, 33, 27, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.admin-ledger .admin-login-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  background:
+    linear-gradient(90deg, transparent, rgba(184, 138, 69, 0.26), transparent),
+    repeating-linear-gradient(0deg, rgba(42, 33, 27, 0.04) 0 1px, transparent 1px 34px);
+  background-size: 100% 1px, 100% 34px;
+}
+
+.admin-ledger .admin-login-card::after {
+  content: '';
+  position: absolute;
+  inset: 0.65rem;
+  pointer-events: none;
+  border: 1px solid rgba(184, 138, 69, 0.16);
+  border-radius: 0.25rem;
+}
+
+.admin-ledger .admin-login-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-ledger .admin-login-card-mark {
+  display: flex;
+  height: 3.25rem;
+  width: 2.4rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(184, 138, 69, 0.34);
+  background: rgba(184, 138, 69, 0.08);
+}
+
+.admin-ledger .admin-login-heading {
+  margin-top: 1.25rem;
+  margin-bottom: 1.7rem;
+}
+
+.admin-ledger .admin-login-heading h2 {
+  margin-top: 0.45rem;
+  color: var(--admin-ink);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1.04;
+}
+
+.admin-ledger .admin-login-ornament {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 1.3rem;
+}
+
+.admin-ledger .admin-login-ornament::before,
+.admin-ledger .admin-login-ornament::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(72, 92, 76, 0.36));
+}
+
+.admin-ledger .admin-login-ornament::after {
+  background: linear-gradient(90deg, rgba(72, 92, 76, 0.36), transparent);
+}
+
+.admin-ledger .admin-login-ornament span {
+  height: 0.62rem;
+  width: 0.62rem;
+  margin-inline: 0.75rem;
+  transform: rotate(45deg);
+  border: 1px solid rgba(184, 138, 69, 0.65);
+}
+
+.admin-ledger .admin-login-input {
+  min-height: 3.25rem;
+  border-color: rgba(72, 92, 76, 0.3);
+  background: rgba(250, 246, 238, 0.8);
+  font-size: 0.95rem;
+}
+
+.admin-ledger .admin-login-submit {
+  min-height: 3.25rem;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.35rem;
+  padding: 0.95rem 1.2rem;
+  box-shadow: 0 18px 32px rgba(113, 74, 28, 0.22);
+}
+
+.admin-ledger .admin-login-forgot {
+  display: block;
+  margin-top: 1.35rem;
+  text-align: center;
+  color: var(--admin-muted);
+  font-size: 0.92rem;
+  transition: color 0.2s ease;
+}
+
+.admin-ledger .admin-login-forgot:hover {
+  color: var(--admin-brass);
+}
+
+.admin-ledger .admin-login-links {
+  margin-top: 1.35rem;
+  text-align: center;
+}
+
+.admin-ledger .admin-login-links p {
+  color: rgba(42, 33, 27, 0.62);
+  font-size: 0.92rem;
+}
+
+.admin-ledger .admin-login-links a {
+  color: var(--admin-brass);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.admin-ledger .admin-login-links a:hover {
+  color: var(--admin-ink);
+}
+
+.admin-ledger .admin-login-security {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  color: rgba(42, 33, 27, 0.42) !important;
+  font-size: 0.78rem !important;
+}
+
+.admin-ledger .admin-hero-panel {
+  position: relative;
+  min-height: 260px;
+  overflow: hidden;
+  border: 1px solid rgba(200, 192, 173, 0.2);
+  border-radius: 0.375rem;
+  background:
+    linear-gradient(90deg, rgba(11, 33, 29, 0.95), rgba(72, 92, 76, 0.78)),
+    url('/images/texture.webp') center / cover;
+  color: var(--admin-parchment);
+  box-shadow: 0 24px 70px rgba(7, 22, 19, 0.26);
+}
+
+.admin-ledger .admin-hero-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.38;
+  background:
+    linear-gradient(100deg, transparent 0 58%, rgba(184, 138, 69, 0.42) 58.2%, transparent 58.5%),
+    linear-gradient(20deg, transparent 0 46%, rgba(242, 232, 216, 0.22) 46.2%, transparent 46.5%),
+    linear-gradient(90deg, rgba(242, 232, 216, 0.12) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(242, 232, 216, 0.1) 1px, transparent 1px);
+  background-size: 720px 380px, 620px 320px, 78px 78px, 78px 78px;
+}
+
+.admin-ledger .admin-hero-panel::after {
+  content: '';
+  position: absolute;
+  right: clamp(1rem, 4vw, 4rem);
+  top: 50%;
+  width: min(26vw, 260px);
+  aspect-ratio: 1;
+  transform: translateY(-50%) rotate(45deg);
+  border: 1px solid rgba(184, 138, 69, 0.46);
+  box-shadow:
+    inset 0 0 0 18px rgba(184, 138, 69, 0.05),
+    inset 0 0 0 19px rgba(242, 232, 216, 0.14);
+  opacity: 0.62;
+}
+
+.admin-ledger .admin-hero-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+ * Textured-surface design system (parallel to .admin-hero-panel,
+ * available site-wide; used by public hero, footer, callout bands).
+ *
+ *   .textured-surface              base (texture + rays + grid)
+ *   .textured-surface--burgundy    deep wine gradient (proposed homepage)
+ *   .textured-surface--sage        matches admin Ledger
+ *   .textured-surface--ink         matches portal Welcome
+ *   .textured-surface--card        hero-style: rounded, bordered, min-height
+ *                                  + gold rotated-diamond accent
+ *   .textured-surface--flush       no border/radius/shadow — for footers and
+ *                                  full-bleed bands
+ *
+ * Texture asset, diagonal gold rays, faint grid stay constant across all
+ * variants for brand cohesion. Color only changes via gradient.
+ * ───────────────────────────────────────────────────────────────── */
+.textured-surface {
+  position: relative;
+  overflow: hidden;
+  color: var(--admin-parchment, #f2e8d8);
+}
+
+.textured-surface--burgundy {
+  background:
+    linear-gradient(90deg, rgba(58, 13, 17, 0.95), rgba(122, 47, 55, 0.78)),
+    url('/images/texture.webp') center / cover;
+}
+
+.textured-surface--sage {
+  background:
+    linear-gradient(90deg, rgba(11, 33, 29, 0.95), rgba(72, 92, 76, 0.78)),
+    url('/images/texture.webp') center / cover;
+}
+
+.textured-surface--ink {
+  background:
+    linear-gradient(90deg, rgba(34, 26, 22, 0.95), rgba(74, 56, 46, 0.78)),
+    url('/images/texture.webp') center / cover;
+}
+
+/* Decorative diagonal gold rays + faint grid removed — dark bands now read as
+ * clean gradient/texture without the overlaid lines. */
+
+.textured-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Card-style: hero-like rounded panel with shadow + gold diamond accent */
+.textured-surface--card {
+  min-height: 260px;
+  border: 1px solid rgba(200, 192, 173, 0.2);
+  border-radius: 0.375rem;
+  box-shadow: 0 24px 70px rgba(7, 22, 19, 0.26);
+}
+
+.textured-surface--card::after {
+  content: '';
+  position: absolute;
+  right: clamp(1rem, 4vw, 4rem);
+  top: 50%;
+  width: min(26vw, 260px);
+  aspect-ratio: 1;
+  transform: translateY(-50%) rotate(45deg);
+  border: 1px solid rgba(184, 138, 69, 0.46);
+  box-shadow:
+    inset 0 0 0 18px rgba(184, 138, 69, 0.05),
+    inset 0 0 0 19px rgba(242, 232, 216, 0.14);
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+/* Flush style: full-bleed, no rounding — for footers and callout bands */
+.textured-surface--flush {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.textured-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2rem;
+  border: 1px solid rgba(184, 138, 69, 0.38);
+  border-radius: 999px;
+  background: rgba(16, 43, 38, 0.35);
+  padding: 0.35rem 0.7rem;
+  color: rgba(242, 232, 216, 0.78);
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.textured-surface--burgundy .textured-pill {
+  background: rgba(58, 13, 17, 0.45);
+}
+
+.textured-surface--ink .textured-pill {
+  background: rgba(34, 26, 22, 0.45);
+}
+
+.textured-kicker {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(184, 138, 69, 0.9);
+}
+
+/* (back-compat aliases for .public-hero removed; only the /preview/hero
+ * page used those names and it's been updated to use .textured-surface) */
+
+.admin-ledger .admin-signal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2rem;
+  border: 1px solid rgba(184, 138, 69, 0.38);
+  border-radius: 999px;
+  background: rgba(16, 43, 38, 0.35);
+  padding: 0.35rem 0.7rem;
+  color: rgba(242, 232, 216, 0.78);
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.admin-ledger .admin-section-card {
+  border: 1px solid var(--admin-border);
+  border-radius: 0.375rem;
+  background: rgba(242, 232, 216, 0.96);
+  box-shadow: 0 14px 32px rgba(16, 43, 38, 0.1);
+}
+
+.admin-ledger .admin-section-title {
+  color: var(--admin-ink);
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.admin-ledger .admin-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(184, 138, 69, 0.38);
+  border-radius: 0.375rem;
+  background: rgba(184, 138, 69, 0.12);
+  color: var(--admin-brass);
+}
+
+.admin-ledger .admin-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(72, 92, 76, 0.25);
+  border-radius: 999px;
+  background: rgba(168, 176, 158, 0.14);
+  color: var(--admin-guide-sage);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.35rem 0.65rem;
+}
+
+.admin-ledger .admin-chip[data-tone='urgent'] {
+  border-color: rgba(168, 92, 60, 0.26);
+  background: rgba(168, 92, 60, 0.1);
+  color: var(--admin-warning);
+}
+
+.admin-ledger .ledger-stat-card {
+  min-height: 136px;
+  border-top: 3px solid rgba(184, 138, 69, 0.55);
+}
+
+.admin-ledger .ledger-stat-card:nth-child(even) {
+  border-top-color: rgba(103, 116, 97, 0.68);
+}
+
+.admin-ledger .admin-operation-card,
+.admin-ledger .admin-quick-action {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(248, 241, 229, 0.96), rgba(236, 223, 202, 0.94));
+}
+
+.admin-ledger .admin-operation-card::after,
+.admin-ledger .admin-quick-action::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(184, 138, 69, 0.45), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.admin-ledger .admin-operation-card:hover::after,
+.admin-ledger .admin-quick-action:hover::after {
+  opacity: 1;
+}
+
+.admin-ledger .admin-rail-card {
+  background: rgba(248, 241, 229, 0.38);
+}
+
+.admin-ledger .admin-rail-card:hover {
+  background: rgba(168, 176, 158, 0.14);
+}
+
+.admin-ledger .admin-status-badge {
+  border-radius: 0.375rem;
+  border: 1px solid currentColor;
+  border-color: color-mix(in srgb, currentColor 24%, transparent);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.admin-ledger .text-ink,
+.admin-ledger .text-\[\#2C2416\] {
+  color: var(--admin-ink) !important;
+}
+
+.admin-ledger .text-ink-soft,
+.admin-ledger .text-\[\#4F4434\] {
+  color: var(--admin-muted) !important;
+}
+
+.admin-ledger .text-gold,
+.admin-ledger .text-\[\#D4AF37\] {
+  color: var(--admin-brass) !important;
+}
+
+.admin-ledger .text-sage,
+.admin-ledger .text-\[\#4A5D5A\] {
+  color: var(--admin-guide-sage) !important;
+}
+
+.admin-ledger .bg-cream {
+  background-color: rgba(233, 221, 201, 0.58) !important;
+}
+
+.admin-ledger .bg-white,
+.admin-ledger .bg-white\/80 {
+  background-color: rgba(242, 232, 216, 0.9) !important;
+}
+
+.admin-ledger .bg-sage {
+  background-color: var(--admin-shell) !important;
+}
+
+.admin-ledger .bg-gold,
+.admin-ledger .bg-\[\#D4AF37\] {
+  background-color: var(--admin-brass) !important;
+}
+
+.admin-ledger .bg-gold\/5,
+.admin-ledger .bg-\[\#D4AF37\]\/5 {
+  background-color: rgba(184, 138, 69, 0.1) !important;
+}
+
+.admin-ledger .bg-gold\/10,
+.admin-ledger .bg-\[\#D4AF37\]\/10 {
+  background-color: rgba(184, 138, 69, 0.14) !important;
+}
+
+.admin-ledger .border-tan\/20,
+.admin-ledger .border-tan\/30,
+.admin-ledger .border-tan\/40,
+.admin-ledger .border-\[\#D4C4A8\]\/20,
+.admin-ledger .border-\[\#D4C4A8\]\/40 {
+  border-color: var(--admin-border) !important;
+}
+
+.admin-ledger .border-gold,
+.admin-ledger .border-gold\/20,
+.admin-ledger .border-gold\/30,
+.admin-ledger .border-gold\/40 {
+  border-color: rgba(184, 138, 69, 0.42) !important;
+}
+
+@media (max-width: 1023px) {
+  .admin-ledger .admin-sidebar {
+    width: 17rem;
+  }
+
+  .admin-ledger .admin-content::before {
+    inset: 4.5rem 0 0 0;
+  }
+
+  .admin-ledger .admin-hero-panel::after {
+    opacity: 0.28;
+    width: 180px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-ledger .admin-login-shell {
+    grid-template-columns: minmax(0, 1.18fr) minmax(390px, 0.82fr);
+  }
+
+  .admin-ledger .admin-login-art {
+    display: flex;
+  }
+}
+
+@layer components {
+  /* ============================== */
+  /* Section layouts                 */
+  /* ============================== */
+  .section-base { padding-block: var(--section-gap); position: relative; }
+  .section-alt { @apply section-base; background-color: var(--color-cream-warm); }
+  /* Dark contrast bands carry the same textured treatment as the homepage's
+   * .textured-surface--ink: an ink gradient over texture.webp, plus a
+   * decorative ::before of diagonal gold rays + faint grid. `isolation` +
+   * a z-index:-1 ::before keep the rays above the background but below all
+   * content, so existing absolutely-positioned decorative children (e.g.
+   * pattern-geometric overlays) are not disturbed — no `> *` rule needed. */
+  .section-contrast {
+    @apply section-base;
+    overflow: hidden;
+    isolation: isolate;
+    background:
+      linear-gradient(90deg, rgba(11, 33, 29, 0.95), rgba(72, 92, 76, 0.78)),
+      url('/images/texture.webp') center / cover;
+    color: var(--color-cream);
+  }
+  /* Color variants — alternate across stacked bands so a page isn't monochrome.
+   * Same texture + rays; only the gradient hue changes. */
+  .section-contrast--burgundy {
+    background:
+      linear-gradient(90deg, rgba(58, 13, 17, 0.95), rgba(122, 47, 55, 0.78)),
+      url('/images/texture.webp') center / cover;
+  }
+  .section-contrast--ink {
+    background:
+      linear-gradient(90deg, rgba(34, 26, 22, 0.95), rgba(74, 56, 46, 0.8)),
+      url('/images/texture.webp') center / cover;
+  }
+  /* Soft band — BEIGE in light mode (with dark text), a slightly-lighter-than-sage
+   * GREEN in dark mode. The inner content paints its text with the cream/tan
+   * tokens (--color-cream, --color-cream-rgb, --color-tan-50); re-scoping those
+   * three to ink here flips all that text dark so it reads on the beige surface,
+   * while gold accents (separate tokens) stay gold. The .dark override below
+   * swaps the bg to green and the .dark .section-contrast rule restores the text
+   * tokens to light, so dark mode keeps light text on the green band. */
+  .section-contrast--soft {
+    background:
+      linear-gradient(90deg, rgba(216, 199, 177, 0.96), rgba(239, 228, 210, 0.92)),
+      url('/images/texture.webp') center / cover;
+    --color-cream: #2C2416;
+    --color-cream-rgb: 44, 36, 22;
+    --color-tan-50: 60, 50, 38;
+  }
+  /* Decorative diagonal gold rays + faint grid removed (see .textured-surface). */
+  .section-contained {
+    max-width: var(--max-content-width);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 4rem);
+  }
+
+  /* ============================== */
+  /* Cards                           */
+  /* ============================== */
+  .luxury-card {
+    background-color: var(--color-surface);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    border: 1px solid var(--color-warm-border);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .luxury-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26, 26, 24, 0.08); }
+
+  .frame-panel {
+    padding: clamp(2rem, 5vw, 4rem);
+    border-radius: 0.5rem;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-warm-border);
+  }
+
+  /* ============================== */
+  /* Buttons — 2026 modern: ink-filled primary, ink-outline secondary,
+   * 8px corners, generous tap targets, clean hover (lift + color shift),
+   * no slide-in pseudo overlay. Uniform across the entire site. */
+  /* ============================== */
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.875rem 1.75rem;
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-ink);
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .cta-primary:hover {
+    background-color: var(--color-ink-soft);
+    border-color: var(--color-ink-soft);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(var(--color-ink-rgb), 0.18);
+  }
+  .cta-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(var(--color-ink-rgb), 0.18);
+  }
+
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    padding: 0.875rem 1.75rem;
+    background-color: transparent;
+    color: var(--color-ink);
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-ink);
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .cta-secondary:hover {
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    transform: translateY(-1px);
+  }
+  .cta-secondary:active {
+    transform: translateY(0);
+  }
+
+  /* Filter / tab control — same rectangle shape as .cta-secondary, just a
+   * size smaller so it reads as a control row, not a CTA. Two states:
+   * inactive (outline) and active (gold fill). */
+  .filter-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.125rem;
+    background-color: transparent;
+    color: var(--color-ink-soft);
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid var(--color-warm-border);
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+  }
+  .filter-pill:hover {
+    border-color: var(--color-ink);
+    color: var(--color-ink);
+  }
+  .filter-pill.is-active,
+  .filter-pill[aria-selected="true"] {
+    background-color: var(--color-gold);
+    border-color: var(--color-gold);
+    color: var(--color-ink);
+  }
+
+  /* ============================== */
+  /* Forms                           */
+  /* ============================== */
+  .form-label {
+    display: block;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .form-input {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: var(--color-ink);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-warm-border);
+    border-radius: 0.25rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    line-height: 1.5;
+  }
+  .form-input::placeholder { color: var(--color-ink-faint); }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-terracotta);
+    box-shadow: 0 0 0 3px rgba(var(--color-terracotta-rgb), 0.1);
+  }
+  .form-input:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* Modernized inputs scoped to the /apply interest form: rounder fields with a
+   * soft gold focus ring (matching the gold pill buttons), without touching the
+   * other site forms. */
+  .apply-form .form-input {
+    border-radius: 0.625rem;
+    padding: 0.85rem 1rem;
+  }
+  .apply-form .form-input:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(var(--color-gold-rgb), 0.18);
+  }
+
+  /* ============================== */
+  /* Grain & texture overlays        */
+  /* ============================== */
+  .grain-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.03;
+    mix-blend-mode: multiply;
+    /* CSS-only noise pattern — avoids expensive SVG feTurbulence filter rendering */
+    background-image:
+      repeating-conic-gradient(rgba(0,0,0,0.06) 0% 25%, transparent 0% 50%),
+      repeating-conic-gradient(rgba(0,0,0,0.06) 0% 25%, transparent 0% 50%);
+    background-size: 3px 3px, 5px 5px;
+    background-position: 0 0, 2px 2px;
+  }
+  .dark .grain-overlay {
+    opacity: 0.04;
+    mix-blend-mode: screen;
+  }
+
+  /* ============================== */
+  /* Decorative divider line         */
+  /* ============================== */
+  .divider-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .divider-line::before,
+  .divider-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-warm-border), transparent);
+  }
+
+  /* Ornate gold divider retired site-wide — the decorative gold dashes read as
+   * stray marks. Kept as a no-op so any lingering .ornate-divider markup renders
+   * nothing. */
+  .ornate-divider { display: none; }
+
+  /* ============================== */
+  /* Image treatments                */
+  /* ============================== */
+  .image-frame {
+    position: relative;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  .image-frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(var(--color-ink-rgb), 0.06);
+    pointer-events: none;
+  }
+
+  .image-grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.08;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    /* CSS-only noise — replaces expensive SVG feTurbulence filter */
+    background-image:
+      repeating-conic-gradient(rgba(0,0,0,0.08) 0% 25%, transparent 0% 50%),
+      repeating-conic-gradient(rgba(0,0,0,0.08) 0% 25%, transparent 0% 50%);
+    background-size: 2px 2px, 4px 4px;
+    background-position: 0 0, 1px 1px;
+  }
+
+  .image-hover-zoom {
+    overflow: hidden;
+  }
+  .image-hover-zoom img {
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .image-hover-zoom:hover img {
+    transform: scale(1.05);
+  }
+
+  /* `.cta-shimmer` retired — kept as a no-op alias so any stray className
+   * references render as a plain cta-primary instead of breaking layout.
+   * Remove from JSX wherever spotted. */
+  .cta-shimmer { /* intentionally empty */ }
+
+  /* Elegant blockquote styling */
+  .blockquote-elegant {
+    position: relative;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--color-gold-muted);
+  }
+
+  /* Drop cap for first letter of paragraph */
+  .drop-cap::first-letter {
+    float: left;
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-size: 3.5em;
+    line-height: 0.8;
+    padding-right: 0.1em;
+    color: var(--color-ink);
+  }
+
+  /* Geometric diamond pattern overlay */
+  .pattern-geometric {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30z' fill='none' stroke='%23c4a94d' stroke-width='0.5' opacity='0.3'/%3E%3Cpath d='M30 10L50 30L30 50L10 30z' fill='none' stroke='%23c4a94d' stroke-width='0.5' opacity='0.2'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+  }
+
+  /* Card tilt effect */
+  .card-tilt {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-tilt:hover {
+    transform: perspective(800px) rotateY(-2deg) rotateX(1deg);
+  }
+
+  /* Input glow on focus */
+  .input-glow:focus {
+    box-shadow: 0 0 0 3px rgba(var(--color-terracotta-rgb), 0.12), 0 0 12px rgba(var(--color-terracotta-rgb), 0.06);
+    border-color: var(--color-terracotta);
+  }
+}
+
+@layer utilities {
+  .warm-border { border: 1px solid var(--color-warm-border); }
+
+  /* Smooth scroll reveal animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(32px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes drawLine {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Horizontal rule animation */
+  .animate-draw-line {
+    transform-origin: left;
+    animation: drawLine 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .cta-primary, .cta-secondary { border: 2px solid ButtonText; }
+    .luxury-card, .frame-panel { border: 1px solid CanvasText; }
+    .form-input { border: 1px solid CanvasText; }
+    .form-input:focus { outline: 2px solid Highlight; }
+  }
+}
+
+/* Dark-mode Tailwind utility overrides. The palette in tailwind.config.js is
+ * hardcoded hex, so utilities like bg-cream/text-ink don't auto-flip. These
+ * patch the page-surface utilities used across content pages.
+ *
+ * Intentionally not touched: text-cream and bg-cream opacity variants used
+ * as always-light text/fills inside .textured-surface bands; gold accents;
+ * anything inside .admin-ledger (already scoped). */
+.dark .bg-cream { background-color: #1a1f1a; }
+.dark .bg-cream-warm { background-color: #242a24; }
+.dark .bg-white { background-color: #1f241f; }
+.dark .bg-white\/80 { background-color: rgba(31, 36, 31, 0.8); }
+.dark .bg-\[\#F8F2E7\] { background-color: #1f241f; }
+
+.dark .text-ink { color: #e8e4dc; }
+.dark .text-ink-soft { color: #ccc8be; }
+.dark .text-ink-faint { color: #9a9590; }
+
+.dark .border-warm-border { border-color: #3a3830; }
+
+/* Member area (portal + members pages, marked with .member-area). Its nav,
+ * dashboard cards, dividers and buttons use OPACITY-modified palette utilities
+ * (bg-white/85, bg-cream/60–80, bg-tan/25–40, border-tan/20–40) that the
+ * page-surface patches above don't cover, so they stayed light on the dark
+ * page. Re-map them to dark surfaces here. Scoped to .member-area so the
+ * .admin-ledger theme and the public/auth pages are untouched. Card surfaces
+ * lift to #222822 (above the #1a1f1a page) so cards still read as cards. */
+.dark .member-area .bg-white\/85 { background-color: rgba(31, 36, 31, 0.9); }
+.dark .member-area .bg-cream,
+.dark .member-area .bg-cream\/80,
+.dark .member-area .bg-cream\/70,
+.dark .member-area .bg-cream\/60 { background-color: #222822; }
+.dark .member-area .bg-tan\/40,
+.dark .member-area .bg-tan\/30,
+.dark .member-area .bg-tan\/25 { background-color: rgba(255, 255, 255, 0.07); }
+.dark .member-area .border-tan\/40,
+.dark .member-area .border-tan\/35,
+.dark .member-area .border-tan\/30,
+.dark .member-area .border-tan\/20 { border-color: rgba(255, 255, 255, 0.1); }
+
+/* Hover states that swap to cream + ink (e.g. .cta-secondary on dark bands)
+ * stay readable: bg becomes the new dark-cream, text the new light-ink. */
+.dark .hover\:bg-cream:hover { background-color: #1a1f1a; }
+.dark .hover\:text-ink:hover { color: #e8e4dc; }
+
+/* `--color-cream`, `--color-cream-rgb`, `--color-tan-50` flip dark for
+ * page-surface bg usage, but are also used as always-light parchment text
+ * on dark bands (footer, .section-contrast/--burgundy/--ink, .textured-surface,
+ * .dark-band, the admin-ledger). Re-scope them back to the light values
+ * inside those zones so always-light text reads correctly. */
+.dark footer,
+.dark .section-contrast,
+.dark .textured-surface,
+.dark .dark-band {
+  --color-cream: #FAF7F0;
+  --color-cream-rgb: 250, 247, 240;
+  --color-tan-50: 250, 247, 240;
+}
+
+/* Soft band, dark mode: a green one step lighter than the sage .section-contrast
+ * gradient (rgba(11,33,29)/rgba(72,92,76)). Non-layered so it beats the layered
+ * beige bg above; the .dark .section-contrast rule already restored the text
+ * tokens to light, so only the background changes here. */
+.dark .section-contrast--soft {
+  background:
+    linear-gradient(90deg, rgba(22, 52, 45, 0.95), rgba(96, 120, 100, 0.80)),
+    url('/images/texture.webp') center / cover;
+}
+
+/* Opt-in: bands that go a deep, dark green in dark mode (not the lighter sage
+ * default, and not brown), over the same texture;
+ * .dark .section-contrast keeps the text light. */
+.dark .section-contrast.band-dark,
+.dark .section-contrast--soft.band-dark {
+  background:
+    linear-gradient(90deg, rgba(12, 28, 23, 0.96), rgba(20, 40, 32, 0.94)),
+    url('/images/texture.webp') center / cover;
+}
+
+/* Site footer band. Light mode: light radiates from the centre, dark in the
+ * corners, revealing the texture. Dark mode: a diagonal deep-green
+ * gradient (~18% darker than light), corners dark. Same in both: light text. */
+.footer-band {
+  background:
+    radial-gradient(85% 75% at 50% 42%, rgba(185, 148, 67, 0.10) 0%, rgba(185, 148, 67, 0) 50%),
+    radial-gradient(125% 125% at 50% 45%, rgba(34, 62, 50, 0.5) 0%, rgba(16, 34, 27, 0.72) 48%, rgba(7, 16, 12, 0.98) 88%),
+    url('/images/texture.webp') center / cover;
+}
+.dark .footer-band {
+  background:
+    radial-gradient(90% 70% at 50% -12%, rgba(185, 148, 67, 0.12) 0%, rgba(185, 148, 67, 0) 55%),
+    radial-gradient(130% 120% at 68% 32%, rgba(24, 46, 37, 0.42) 0%, rgba(24, 46, 37, 0) 52%),
+    linear-gradient(135deg, rgba(5, 12, 9, 0.98) 0%, rgba(12, 27, 21, 0.78) 50%, rgba(6, 15, 11, 0.99) 100%),
+    url('/images/texture.webp') center / cover;
+}
+
+/* Dark-mode CTA overrides. cta-primary inverts from ink → gold so it stays
+ * the high-contrast "primary action" on dark backgrounds. cta-secondary
+ * brightens its border + text so the outline reads on dark surfaces. */
+.dark .cta-primary {
+  background-color: #c4a94d;
+  color: #17120E;
+  border-color: #c4a94d;
+}
+.dark .cta-primary:hover {
+  background-color: #8B6B2E;
+  border-color: #8B6B2E;
+  color: #FAF7F0;
+  box-shadow: 0 8px 20px rgba(196, 169, 77, 0.28);
+}
+
+.dark .cta-secondary {
+  color: #e8e4dc;
+  border-color: rgba(232, 228, 220, 0.5);
+}
+.dark .cta-secondary:hover {
+  background-color: rgba(232, 228, 220, 0.1);
+  border-color: rgba(232, 228, 220, 0.95);
+  color: #FAF7F0;
+}
+
+.dark .filter-pill {
+  color: #ccc8be;
+  border-color: rgba(232, 228, 220, 0.25);
+}
+.dark .filter-pill:hover {
+  color: #e8e4dc;
+  border-color: rgba(232, 228, 220, 0.6);
+}
+.dark .filter-pill.is-active,
+.dark .filter-pill[aria-selected="true"] {
+  background-color: #c4a94d;
+  border-color: #c4a94d;
+  color: #17120E;
+}
+
+/* When .cta-secondary or .filter-pill live inside a dark band (the burgundy
+ * Upcoming Events strip, the sage Come-to-an-Event CTA, the donate bottom
+ * CTA, the footer, etc.), the default ink text + ink border disappear into
+ * the dark background. Repaint with light cream borders + text so they
+ * read. Active filter-pill stays gold-filled, which already contrasts. */
+.section-contrast .cta-secondary,
+.textured-surface .cta-secondary,
+.dark-band .cta-secondary,
+footer .cta-secondary,
+.section-contrast .filter-pill,
+.textured-surface .filter-pill,
+.dark-band .filter-pill,
+footer .filter-pill {
+  color: rgba(250, 247, 240, 0.78);
+  border-color: rgba(250, 247, 240, 0.32);
+}
+.section-contrast .cta-secondary:hover,
+.textured-surface .cta-secondary:hover,
+.dark-band .cta-secondary:hover,
+footer .cta-secondary:hover,
+.section-contrast .filter-pill:hover,
+.textured-surface .filter-pill:hover,
+.dark-band .filter-pill:hover,
+footer .filter-pill:hover {
+  background-color: rgba(250, 247, 240, 0.1);
+  border-color: rgba(250, 247, 240, 0.75);
+  color: #FAF7F0;
+}
+.section-contrast .filter-pill.is-active,
+.section-contrast .filter-pill[aria-selected="true"],
+.textured-surface .filter-pill.is-active,
+.textured-surface .filter-pill[aria-selected="true"],
+.dark-band .filter-pill.is-active,
+.dark-band .filter-pill[aria-selected="true"],
+footer .filter-pill.is-active,
+footer .filter-pill[aria-selected="true"] {
+  background-color: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* The .soft band runs LIGHT in light mode, so the dark-band filter-pill repaint
+ * above (light cream text) vanishes on the beige surface. Repaint inactive
+ * pills with ink text/border here. Active pills stay gold-filled (rule above,
+ * higher specificity). The .dark overrides restore the light treatment because
+ * the soft band is green again in dark mode. */
+.section-contrast--soft .filter-pill {
+  color: rgba(44, 36, 22, 0.82);
+  border-color: rgba(44, 36, 22, 0.30);
+}
+.section-contrast--soft .filter-pill:hover {
+  background-color: rgba(44, 36, 22, 0.06);
+  border-color: rgba(44, 36, 22, 0.55);
+  color: #2C2416;
+}
+.dark .section-contrast--soft .filter-pill {
+  color: rgba(250, 247, 240, 0.78);
+  border-color: rgba(250, 247, 240, 0.32);
+}
+.dark .section-contrast--soft .filter-pill:hover {
+  background-color: rgba(250, 247, 240, 0.1);
+  border-color: rgba(250, 247, 240, 0.75);
+  color: #FAF7F0;
+}
+
+/* iOS Safari auto-zooms the page when a focused input renders under 16px and
+ * often stays zoomed after blur. Floor every field on phones; !important so the
+ * floor beats utility classes and .form-input's 15px. Desktop is untouched. */
+@media (max-width: 767px) {
+  input,
+  select,
+  textarea {
+    font-size: max(1rem, 1em) !important;
+  }
+}
