@@ -1,0 +1,42 @@
+{
+  "name": "camp-platform",
+  "version": "1.0.0",
+  "description": "Self-hostable member, season, and operations management for Burning Man theme camps",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "npm run start --workspace=@camp-platform/web",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean",
+    "db:generate": "cd packages/database && npx prisma generate",
+    "db:migrate": "cd packages/database && npx prisma migrate dev",
+    "db:studio": "cd packages/database && npx prisma studio",
+    "db:seed": "cd packages/database && npm run seed",
+    "db:reset": "cd packages/database && npx prisma migrate reset",
+    "db:setup": "cd packages/database && npm run setup",
+    "db:push": "cd packages/database && npx prisma db push",
+    "db:create-admin": "cd packages/database && npm run create-admin --"
+  },
+  "keywords": [
+    "burning-man",
+    "theme-camp",
+    "camp-management",
+    "nextjs",
+    "prisma"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.19.17",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "eslint": "^8.57.1",
+    "prettier": "^3.6.2",
+    "turbo": "^1.13.4",
+    "typescript": "^5.9.2"
+  }
+}
