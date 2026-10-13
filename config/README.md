@@ -49,7 +49,9 @@ landing page, the FAQ, page titles, emails, and JSON-LD together.
 
 | Section | Where it shows |
 | --- | --- |
-| `hero` | Landing page hero. `image` is the full-bleed background (loaded with `priority`). |
+| `hero` | Landing page hero with a rust title panel and a camp image (loaded with `priority`). |
+| `hero.titleLines` | Optional two-part title: a small prefix and large display name. Falls back to `hero.title` when omitted. |
+| `home.fieldNotes` | Short camp mottos on the yellow strip below the hero. |
 | `home.about` | "What we do" section: three image cards. |
 | `home.joining` | "How joining works" strip: apply, get approved, pay dues, sign up for shifts. |
 | `home.closing` | Closing call-to-action band over a night photo. |
@@ -72,7 +74,8 @@ The landing page expects these files in `packages/web/public/images/`:
 | `camp-day.webp`, `lounge.webp`, `build-crew.webp` | "What we do" cards |
 | `camp-night.webp` | Closing CTA band |
 | `texture.webp`, `pattern.webp` | Background textures used by `globals.css` |
-| `brand/logo-256.webp`, `brand/logo-512.webp` | Logo in the nav, footer, and auth pages |
+| `brand/wind-mark.svg` | Public nav, footer, and login mark, selected by `brand.config.ts` → `assets.logo` |
+| `brand/logo-256.webp`, `brand/logo-512.webp` | Original illustrated marks, still used in the admin area |
 | `brand/logo-light-512.png`, `brand/logo-dark-512.png` | Logo variants for light/dark backgrounds |
 | `brand/app-icon-192.png`, `brand/app-icon-512.png`, `brand/app-icon-maskable-512.png` | PWA manifest icons |
 
@@ -84,6 +87,12 @@ rendered with `next/image` are resized by the optimizer, but CSS backgrounds
 (`texture.webp`, `pattern.webp`) are served as-is, so compress those by hand.
 
 ## `brand.config.ts`
+
+Dust Devil uses rust, sun yellow, paper, and charcoal, with Barlow Condensed
+headings and Space Grotesk body text. Public layout and button treatments live
+in `packages/web/src/styles/public-site.css`; update its fixed brand colors too
+when changing the palette. Legacy `gold` and `sage` tokens are compatibility
+aliases for the new accents.
 
 `colors` and `theme.colors` describe the palette; `fonts` names the display
 and body families; `assets` holds logo and Open Graph paths used by metadata.

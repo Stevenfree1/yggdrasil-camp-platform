@@ -4,7 +4,7 @@ import { memo, forwardRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mail } from 'lucide-react';
-import { useCampConfig, useContentConfig } from '../hooks/useConfig';
+import { useBrandConfig, useCampConfig, useContentConfig } from '../hooks/useConfig';
 
 // Brand glyphs (Simple Icons, CC0 — single-path, recolored to currentColor so
 // they inherit the footer's cream/gold theme). Crisp at any size, unlike a
@@ -32,6 +32,7 @@ type FooterVariant = 'gradient' | 'sage' | 'ink' | 'burgundy';
 
 export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: { variant?: FooterVariant } = {}, _ref) {
   const campConfig = useCampConfig();
+  const brand = useBrandConfig();
   const { footer } = useContentConfig();
 
   const currentYear = new Date().getFullYear();
@@ -52,15 +53,6 @@ export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: 
         className="footer-band relative"
         style={{ color: 'var(--color-cream)' }}
       >
-        {/* Gold hairline along the top edge */}
-        <div
-          className="absolute inset-x-0 top-0 h-px"
-          style={{
-            background: 'linear-gradient(90deg, transparent 4%, rgba(var(--color-gold-rgb), 0.9) 50%, transparent 96%)',
-            boxShadow: '0 0 10px rgba(var(--color-gold-rgb), 0.4)',
-          }}
-          aria-hidden="true"
-        />
         {/* Subtle geometric pattern overlay — only on the legacy gradient
             variant; textured variants already carry their own pattern */}
         {variant === 'gradient' && (
@@ -84,7 +76,7 @@ export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: 
               >
                 <div className="flex items-center gap-4">
                   <Image
-                    src="/images/brand/logo-256.webp"
+                    src={brand.assets.logo}
                     alt={campConfig.name}
                     width={56}
                     height={56}
@@ -92,7 +84,7 @@ export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: 
                   />
                   <div>
                   <h3
-                    className="font-display text-2xl md:text-3xl uppercase tracking-[0.16em]"
+                    className="font-display text-3xl md:text-4xl uppercase tracking-tight"
                     style={{ color: 'var(--color-cream)' }}
                   >
                     {campConfig.name}
@@ -146,12 +138,12 @@ export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: 
                     href={`mailto:${campConfig.email}`}
                     aria-label={`Send email to ${campConfig.email}`}
                     className="group inline-flex items-center gap-2 text-sm transition-colors duration-300 pt-1"
-                    style={{ color: 'rgba(var(--color-cream-rgb), 0.55)' }}
+                    style={{ color: 'rgba(var(--color-cream-rgb), 0.7)' }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = 'var(--color-gold-muted)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = 'rgba(var(--color-cream-rgb), 0.55)';
+                      e.currentTarget.style.color = 'rgba(var(--color-cream-rgb), 0.7)';
                     }}
                   >
                     <Mail className="h-3.5 w-3.5" aria-hidden="true" />
@@ -168,7 +160,7 @@ export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: 
                 >
                   <h4
                     className="text-[11px] tracking-[0.25em] uppercase font-medium"
-                    style={{ color: 'rgba(var(--color-cream-rgb), 0.4)' }}
+                    style={{ color: 'rgba(var(--color-cream-rgb), 0.7)' }}
                   >
                     {section.title}
                   </h4>
@@ -197,13 +189,13 @@ export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: 
                 <div className="md:col-span-3 space-y-5">
                   <h4
                     className="text-[11px] tracking-[0.25em] uppercase font-medium"
-                    style={{ color: 'rgba(var(--color-cream-rgb), 0.4)' }}
+                    style={{ color: 'rgba(var(--color-cream-rgb), 0.7)' }}
                   >
                     Organization
                   </h4>
                   <p
                     className="text-sm leading-relaxed"
-                    style={{ color: 'rgba(var(--color-cream-rgb), 0.55)' }}
+                    style={{ color: 'rgba(var(--color-cream-rgb), 0.7)' }}
                   >
                     {campConfig.legalName} is a {campConfig.taxStatus} organization.
                     {footer.nonprofitBlurb ? ` ${footer.nonprofitBlurb}` : ''}
@@ -211,7 +203,7 @@ export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: 
                   {campConfig.ein && (
                     <p
                       className="text-[12px] leading-relaxed"
-                      style={{ color: 'rgba(var(--color-cream-rgb), 0.35)' }}
+                      style={{ color: 'rgba(var(--color-cream-rgb), 0.7)' }}
                     >
                       EIN {campConfig.ein}
                     </p>
@@ -228,7 +220,7 @@ export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: 
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               <p
                 className="text-[11px] tracking-[0.04em]"
-                style={{ color: 'rgba(var(--color-cream-rgb), 0.35)' }}
+                style={{ color: 'rgba(var(--color-cream-rgb), 0.7)' }}
               >
                 &copy; {currentYear} {campConfig.legalName || campConfig.name}. All rights reserved.
               </p>
@@ -236,7 +228,7 @@ export const Footer = memo(forwardRef(function Footer({ variant = 'gradient' }: 
               <div className="flex items-center gap-6">
                 <p
                   className="text-[11px] tracking-[0.12em] uppercase flex items-center gap-2"
-                  style={{ color: 'rgba(var(--color-cream-rgb), 0.3)' }}
+                  style={{ color: 'rgba(var(--color-cream-rgb), 0.7)' }}
                 >
                   <span
                     className="w-1 h-1 rounded-full"

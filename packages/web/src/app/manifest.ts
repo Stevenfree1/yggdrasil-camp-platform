@@ -15,8 +15,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: camp.description,
     start_url: '/',
     display: 'standalone',
-    background_color: '#17362F',
-    theme_color: '#17362F',
+    background_color: '#FFF4DF',
+    theme_color: '#B44229',
     icons: [
       {
         src: '/images/brand/app-icon-192.png',

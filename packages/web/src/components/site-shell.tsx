@@ -26,14 +26,17 @@ function shouldHidePublicChrome(pathname: string): boolean {
 export function SiteShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const hidePublicChrome = shouldHidePublicChrome(pathname);
+  const isOperationsArea = ['/admin', '/portal', '/members'].some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
+  );
 
   return (
-    <>
+    <div className={isOperationsArea ? undefined : 'public-site'}>
       {!hidePublicChrome && <Navigation />}
       <div id="main-content" tabIndex={-1}>
         {children}
       </div>
       {!hidePublicChrome && <Footer variant="ink" />}
-    </>
+    </div>
   );
 }

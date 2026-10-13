@@ -1,7 +1,8 @@
 import { ReactNode, Suspense } from "react";
 import type { Viewport } from 'next';
 import "../styles/globals.css";
-import { Playfair_Display, Inter } from 'next/font/google';
+import "../styles/public-site.css";
+import { Barlow_Condensed, Space_Grotesk } from 'next/font/google';
 import { ThemeProvider } from '../components/theme-provider';
 import { MotionProvider } from '../components/motion-provider';
 import { AuthProvider } from '../contexts/AuthContext';
@@ -12,19 +13,18 @@ import { pageMetadata } from '@/lib/metadata';
 import { Toaster } from 'sonner';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
-const playfair = Playfair_Display({
+const display = Barlow_Condensed({
   subsets: ['latin'],
-  variable: '--font-playfair',
-  weight: ['400'],
-  style: ['normal', 'italic'],
+  variable: '--font-display',
+  weight: ['600', '700', '800'],
   display: 'swap',
   preload: true,
 });
 
-const inter = Inter({
+const body = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-inter',
-  weight: ['300', '400', '500'],
+  variable: '--font-body',
+  weight: ['400', '500', '600', '700'],
   display: 'swap',
   preload: true,
 });
@@ -37,8 +37,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FAF7F0' },
-    { media: '(prefers-color-scheme: dark)', color: '#17362F' },
+    { media: '(prefers-color-scheme: light)', color: '#FFF4DF' },
+    { media: '(prefers-color-scheme: dark)', color: '#232722' },
   ],
 };
 
@@ -48,7 +48,7 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable} scroll-smooth`} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${body.variable} scroll-smooth`} suppressHydrationWarning>
       <head>
         <StructuredData />
       </head>

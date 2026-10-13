@@ -24,7 +24,7 @@ from it.
 
 ## 3. Look
 
-- **Colors and fonts:** `config/brand.config.ts`. Tailwind tokens are in `packages/web/tailwind.config.js`, and the component classes are in `packages/web/src/styles/globals.css`.
+- **Colors and fonts:** `config/brand.config.ts`. Tailwind tokens are in `packages/web/tailwind.config.js`, shared tokens are in `packages/web/src/styles/globals.css`, and the public poster styling is in `packages/web/src/styles/public-site.css`. Font imports live in `packages/web/src/app/layout.tsx`.
 - **Images:** every image is a placeholder illustration. Replace them, keeping the file names:
 
 | File (under `packages/web/public/`) | Where it shows |
@@ -35,7 +35,8 @@ from it.
 | `images/portal-group.webp` | Member portal header |
 | `images/texture.webp`, `images/pattern.webp` | Subtle page backgrounds (keep these small) |
 | `images/compass-plate.webp` | Lodging-map compass medallion |
-| `images/brand/logo-*.webp/png` | Logo in nav, footer, auth pages, admin |
+| `images/brand/wind-mark.svg` | Public nav, footer, and login mark (configured in `brand.config.ts`) |
+| `images/brand/logo-*.webp/png` | Original illustrated marks used in admin |
 | `images/brand/app-icon-*.png` | Home-screen / PWA icons |
 | `wallpapers/camp-day.jpg`, `wallpapers/camp-night.jpg` | Downloadable phone wallpapers on the portal travel card |
 

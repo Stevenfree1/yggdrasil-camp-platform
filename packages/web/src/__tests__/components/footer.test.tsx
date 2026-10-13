@@ -22,6 +22,7 @@ const mockCamp = {
 };
 
 jest.mock('../../hooks/useConfig', () => ({
+  useBrandConfig: () => ({ assets: { logo: '/images/brand/wind-mark.svg' } }),
   useCampConfig: () => mockCamp,
   useContentConfig: () => ({
     footer: {

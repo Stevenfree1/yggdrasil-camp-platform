@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Wind } from 'lucide-react';
 import { Reveal } from '../components/reveal';
 import { getCampConfig, getContentConfig } from '../lib/config';
 import { getIcon } from '../lib/icons';
@@ -16,8 +16,7 @@ function PrimaryCta({ cta, onDark = false }: { cta: CtaLink; onDark?: boolean })
   return (
     <Link
       href={cta.link}
-      className="cta-primary shadow-lg"
-      style={onDark ? { backgroundColor: '#FAF7F0', color: '#2A1F1A', borderColor: '#FAF7F0' } : undefined}
+      className={`cta-primary ${onDark ? 'cta-sun' : ''}`}
     >
       <span>{cta.text}</span>
       <Icon className="h-4 w-4" aria-hidden="true" />
@@ -31,7 +30,7 @@ function SecondaryCta({ cta, onDark = false }: { cta: CtaLink; onDark?: boolean 
       href={cta.link}
       className={
         onDark
-          ? 'cta-secondary border-white/50 text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 hover:text-white'
+          ? 'cta-secondary cta-on-dark'
           : 'cta-secondary'
       }
     >
@@ -45,46 +44,46 @@ export default function HomePage() {
   const { hero, home } = getContentConfig();
 
   return (
-    <main style={{ backgroundColor: 'var(--color-cream)' }}>
+    <main className="camp-home" style={{ backgroundColor: 'var(--color-cream)' }}>
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative isolate flex min-h-[92vh] items-end overflow-hidden pt-28">
-        <Image
-          src={hero.image.src}
-          alt={hero.image.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="-z-20 object-cover object-center"
-        />
-        <div
-          className="absolute inset-0 -z-10"
-          style={{
-            background:
-              'linear-gradient(180deg, rgba(20,14,10,0.25) 0%, rgba(20,14,10,0.35) 45%, rgba(20,14,10,0.82) 100%)',
-          }}
-          aria-hidden="true"
-        />
-
-        <div className="section-contained w-full pb-16 md:pb-24">
-          <Reveal direction="up" className="max-w-3xl">
-            <p className="mb-5 text-[11px] font-medium uppercase tracking-[0.3em] text-white/75">
-              {hero.eyebrow}
-            </p>
-            <h1 className="font-display text-5xl leading-[0.95] text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.35)] sm:text-6xl md:text-7xl lg:text-8xl">
-              {hero.title}
+      <section className="camp-hero">
+        <div className="camp-hero-copy">
+          <Reveal direction="up">
+            <p className="camp-hero-eyebrow">{hero.eyebrow}</p>
+            <h1 className="camp-hero-title">
+              {hero.titleLines ? (
+                <><span className="camp-title-prefix">{hero.titleLines[0]}</span>{' '}{hero.titleLines[1]}</>
+              ) : hero.title}
             </h1>
-            <p className="mt-6 font-accent text-xl italic text-white/90 md:text-2xl">{hero.subtitle}</p>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-white/75 md:text-lg">
-              {hero.description}
-            </p>
-          </Reveal>
-
-          <Reveal direction="up" delay={0.15} className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <PrimaryCta cta={hero.cta.primary} onDark />
-            <SecondaryCta cta={hero.cta.secondary} onDark />
+            <p className="camp-hero-tagline">{hero.subtitle}</p>
+            <p className="camp-hero-description">{hero.description}</p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <PrimaryCta cta={hero.cta.primary} onDark />
+              <SecondaryCta cta={hero.cta.secondary} onDark />
+            </div>
           </Reveal>
         </div>
+        <div className="camp-hero-photo">
+          <Image
+            src={hero.image.src}
+            alt={hero.image.alt}
+            fill
+            priority
+            sizes="(min-width: 900px) 48vw, 100vw"
+            className="object-cover"
+          />
+          <div className="camp-wind-stamp" aria-hidden="true">
+            <Wind strokeWidth={1.6} />
+          </div>
+          <p className="camp-photo-caption">{camp.location}</p>
+        </div>
       </section>
+
+      <div className="camp-field-notes">
+        {home.fieldNotes.map((note) => (
+          <span key={note}><span aria-hidden="true">✳</span>{note}</span>
+        ))}
+      </div>
 
       {/* ── What we do ───────────────────────────────────────── */}
       <section className="section-base">
@@ -104,7 +103,7 @@ export default function HomePage() {
               const Icon = getIcon(card.icon);
               return (
                 <Reveal key={card.title} direction="up" delay={i * 0.1}>
-                  <article className="group h-full overflow-hidden rounded-lg border bg-[var(--color-surface)]" style={{ borderColor: 'var(--color-warm-border)' }}>
+                  <article className="camp-story-card group h-full overflow-hidden border bg-[var(--color-surface)]" style={{ borderColor: 'var(--color-warm-border)' }}>
                     <div className="image-frame relative aspect-[4/3] rounded-none">
                       <Image
                         src={card.image.src}
@@ -117,7 +116,7 @@ export default function HomePage() {
                     <div className="p-6">
                       <div className="mb-3 flex items-center gap-3">
                         <Icon className="h-5 w-5" style={{ color: 'var(--color-gold)' }} aria-hidden="true" />
-                        <h3 className="font-display text-xl" style={{ color: 'var(--color-ink)' }}>
+                        <h3 className="font-display text-3xl uppercase" style={{ color: 'var(--color-ink)' }}>
                           {card.title}
                         </h3>
                       </div>
@@ -134,7 +133,7 @@ export default function HomePage() {
       </section>
 
       {/* ── How joining works ────────────────────────────────── */}
-      <section className="section-alt">
+      <section className="camp-joining section-alt">
         <div className="section-contained">
           <Reveal direction="up" className="max-w-2xl">
             <p className="text-eyebrow mb-4">{home.joining.eyebrow}</p>
@@ -152,10 +151,10 @@ export default function HomePage() {
               return (
                 <li key={step.title}>
                   <Reveal direction="up" delay={i * 0.08} className="h-full">
-                    <div className="luxury-card h-full !p-6">
+                    <div className="camp-step h-full">
                       <div className="mb-5 flex items-center justify-between">
                         <span
-                          className="font-display text-3xl"
+                          className="font-display text-5xl"
                           style={{ color: 'var(--color-gold)' }}
                           aria-hidden="true"
                         >
@@ -163,7 +162,7 @@ export default function HomePage() {
                         </span>
                         <Icon className="h-5 w-5" style={{ color: 'var(--color-ink-faint)' }} aria-hidden="true" />
                       </div>
-                      <h3 className="font-display text-xl mb-2" style={{ color: 'var(--color-ink)' }}>
+                      <h3 className="font-display text-2xl uppercase mb-2" style={{ color: 'var(--color-ink)' }}>
                         <span className="sr-only">Step {i + 1}: </span>
                         {step.title}
                       </h3>

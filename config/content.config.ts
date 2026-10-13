@@ -23,6 +23,7 @@ export const contentConfig: ContentConfig = {
   hero: {
     eyebrow: `A Burning Man theme camp · ${campConfig.location}`,
     title: camp,
+    titleLines: ['Camp', campConfig.shortName],
     subtitle: campConfig.tagline,
     description:
       'A 24-hour coffee bar, a shaded lounge out of the afternoon sun, and a crew that builds it together every year.',
@@ -37,6 +38,7 @@ export const contentConfig: ContentConfig = {
   },
 
   home: {
+    fieldNotes: ['Coffee on.', 'Shade up.', 'Everybody pitches in.'],
     about: {
       eyebrow: 'What we do',
       title: 'Coffee, shade, and a place to land',

@@ -8,7 +8,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Menu, X, Sun, Moon, ArrowRight } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { cn } from '../lib/utils';
-import { useCampConfig, useContentConfig } from '../hooks/useConfig';
+import { useBrandConfig, useCampConfig, useContentConfig } from '../hooks/useConfig';
 import { useAuth, hasAdminAccess } from '../contexts/AuthContext';
 
 /**
@@ -20,6 +20,7 @@ import { useAuth, hasAdminAccess } from '../contexts/AuthContext';
  */
 export const Navigation = memo(forwardRef(function Navigation(_props, _ref) {
   const campConfig = useCampConfig();
+  const brand = useBrandConfig();
   const { navigation } = useContentConfig();
   const { user, isAuthenticated } = useAuth();
   const pathname = usePathname();
@@ -100,7 +101,7 @@ export const Navigation = memo(forwardRef(function Navigation(_props, _ref) {
     <>
       <motion.nav
         aria-label="Main navigation"
-        className="fixed top-0 left-0 right-0 z-50"
+        className="camp-navigation fixed top-0 left-0 right-0 z-50"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -116,8 +117,7 @@ export const Navigation = memo(forwardRef(function Navigation(_props, _ref) {
         <div
           className="absolute bottom-0 left-0 right-0 h-[2px]"
           style={{
-            background: 'linear-gradient(90deg, transparent 2%, var(--color-gold) 50%, transparent 98%)',
-            opacity: 0.9,
+            background: 'var(--color-rust)',
           }}
           aria-hidden="true"
         />
@@ -130,7 +130,7 @@ export const Navigation = memo(forwardRef(function Navigation(_props, _ref) {
               className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2 rounded-sm"
             >
               <Image
-                src="/images/brand/logo-256.webp"
+                src={brand.assets.logo}
                 alt={campConfig.name}
                 width={48}
                 height={48}
@@ -138,14 +138,14 @@ export const Navigation = memo(forwardRef(function Navigation(_props, _ref) {
               />
               <span className="flex flex-col leading-none">
                 <span
-                  className="text-lg sm:text-2xl font-display uppercase tracking-[0.18em]"
+                  className="camp-wordmark text-2xl sm:text-3xl font-display uppercase tracking-tight"
                   style={{ color: 'var(--color-ink)' }}
                 >
                   {campConfig.name}
                 </span>
                 <span
-                  className="mt-1 block text-[9px] sm:text-[10px] leading-tight uppercase tracking-[0.12em] font-body"
-                  style={{ color: 'var(--color-gold-muted)' }}
+                  className="camp-lockup-note mt-1 block text-[9px] sm:text-[10px] leading-tight uppercase tracking-[0.08em] font-body"
+                  style={{ color: 'var(--color-ink-soft)' }}
                 >
                   {navigation.lockupSubtitle}
                 </span>
@@ -159,7 +159,7 @@ export const Navigation = memo(forwardRef(function Navigation(_props, _ref) {
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    'group relative rounded-full px-4 py-2 text-[11px] uppercase tracking-[0.16em] font-semibold transition-colors duration-300',
+                    'group relative rounded-sm px-4 py-2 text-xs uppercase tracking-[0.08em] font-semibold transition-colors duration-300',
                     'focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2',
                     isActive(item.href) ? 'text-ink' : 'text-ink-soft hover:text-ink'
                   )}
@@ -168,8 +168,8 @@ export const Navigation = memo(forwardRef(function Navigation(_props, _ref) {
                   {isActive(item.href) && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-0 rounded-full"
-                      style={{ backgroundColor: 'rgba(var(--color-gold-rgb), 0.16)' }}
+                      className="absolute inset-0 rounded-sm"
+                      style={{ backgroundColor: 'rgba(var(--color-gold-rgb), 0.14)' }}
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                       aria-hidden="true"
                     />

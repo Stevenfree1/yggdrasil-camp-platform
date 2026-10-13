@@ -105,6 +105,8 @@ export interface ContentConfig {
     eyebrow: string;
     /** Big title. Usually the camp name. */
     title: string;
+    /** Optional smaller first line above the display name. */
+    titleLines?: [string, string];
     subtitle: string;
     description: string;
     image: ImageRef;
@@ -116,6 +118,8 @@ export interface ContentConfig {
 
   /** Landing page sections below the hero */
   home: {
+    /** Short camp mottos displayed on the landing-page strip. */
+    fieldNotes: string[];
     about: {
       eyebrow: string;
       title: string;

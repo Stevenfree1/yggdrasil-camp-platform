@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Loader2, AlertCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
-import { getCampConfig } from '@/lib/config';
+import { getBrandConfig, getCampConfig } from '@/lib/config';
 
 const campName = getCampConfig().name;
 
@@ -119,7 +119,7 @@ function LoginForm() {
             }}
           >
             <Image
-              src="/images/brand/logo-256.webp"
+              src={getBrandConfig().assets.logo}
               alt={campName}
               width={54}
               height={78}

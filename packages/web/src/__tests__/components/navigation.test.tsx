@@ -66,6 +66,7 @@ jest.mock('next-themes', () => ({
 
 // Mock the config hooks
 jest.mock('../../hooks/useConfig', () => ({
+  useBrandConfig: () => ({ assets: { logo: '/images/brand/wind-mark.svg' } }),
   useCampConfig: () => ({
     name: 'Camp Test Fixture',
     tagline: 'A test camp',

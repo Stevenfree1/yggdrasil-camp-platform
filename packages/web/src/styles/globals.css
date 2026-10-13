@@ -41,27 +41,30 @@
   button:focus-visible { outline: 2px solid var(--color-terracotta); outline-offset: 2px; border-radius: 0.125rem; }
 
   :root {
-    --color-cream: #FAF7F0;
-    --color-cream-warm: #EFE4D2;
-    --color-ink: #3A211F;
-    --color-ink-rgb: 58, 33, 31;
-    --color-ink-soft: #5B4E43;
-    --color-ink-faint: #7B6755;
-    --color-gold: #B99443;
-    --color-gold-muted: #C49A4D;
-    --color-terracotta: #B96443;
-    --color-terracotta-rgb: 185, 100, 67;
-    --color-gold-rgb: 185, 148, 67;
-    --color-cream-rgb: 250, 247, 240;
-    --color-sage: #8E9A86;
-    --color-sage-soft: #A8B09E;
-    --color-sage-pale: #B7BCA9;
-    --color-sage-rgb: 142, 154, 134;
-    --color-warm-border: #D8C7B1;
-    --color-line-rgb: 216, 199, 177;
-    --color-tan-50: 250, 247, 240;
-    --color-surface: #ffffff;
-    --color-surface-alt: #EFE4D2;
+    --color-cream: #FFF4DF;
+    --color-sun: #F3CC61;
+    --color-rust: #B44229;
+    --color-night: #232722;
+    --color-cream-warm: #F3E4C9;
+    --color-ink: #252720;
+    --color-ink-rgb: 37, 39, 32;
+    --color-ink-soft: #55554D;
+    --color-ink-faint: #706E63;
+    --color-gold: #B44229;
+    --color-gold-muted: #B44229;
+    --color-terracotta: #B44229;
+    --color-terracotta-rgb: 180, 66, 41;
+    --color-gold-rgb: 180, 66, 41;
+    --color-cream-rgb: 255, 244, 223;
+    --color-sage: #B44229;
+    --color-sage-soft: #D77B5D;
+    --color-sage-pale: #EAB69A;
+    --color-sage-rgb: 180, 66, 41;
+    --color-warm-border: #D3C3A5;
+    --color-line-rgb: 211, 195, 165;
+    --color-tan-50: 255, 244, 223;
+    --color-surface: #FFFBF1;
+    --color-surface-alt: #F3E4C9;
     --color-success: #2e7d32;
     --color-warning: #C58B2A;
     --color-error: #A85C3C;
@@ -72,24 +75,24 @@
   }
 
   .dark {
-    --color-cream: #1a1f1a;
-    --color-cream-warm: #242a24;
-    --color-ink: #e8e4dc;
-    --color-ink-rgb: 232, 228, 220;
-    --color-ink-soft: #ccc8be;
-    --color-ink-faint: #9a9590;
-    --color-gold: #c4a94d;
-    --color-gold-muted: #b8960c;
-    --color-terracotta: #c47040;
-    --color-terracotta-rgb: 196, 112, 64;
-    --color-gold-rgb: 196, 169, 77;
-    --color-cream-rgb: 26, 31, 26;
-    --color-sage: #7a8e7a;
-    --color-warm-border: #3a3830;
-    --color-line-rgb: 58, 56, 48;
-    --color-tan-50: 26, 31, 26;
-    --color-surface: #222822;
-    --color-surface-alt: #2a302a;
+    --color-cream: #20231F;
+    --color-cream-warm: #2A2D27;
+    --color-ink: #FFF4DF;
+    --color-ink-rgb: 255, 244, 223;
+    --color-ink-soft: #DDD2BD;
+    --color-ink-faint: #B1AD9F;
+    --color-gold: #F3CC61;
+    --color-gold-muted: #F3CC61;
+    --color-terracotta: #EE9574;
+    --color-terracotta-rgb: 238, 149, 116;
+    --color-gold-rgb: 243, 204, 97;
+    --color-cream-rgb: 32, 35, 31;
+    --color-sage: #D77B5D;
+    --color-warm-border: #494C40;
+    --color-line-rgb: 73, 76, 64;
+    --color-tan-50: 32, 35, 31;
+    --color-surface: #2A2D27;
+    --color-surface-alt: #30342C;
     --color-success: #4caf50;
     --color-warning: #e0a82e;
     --color-error: #e05a4f;
@@ -102,7 +105,7 @@
   }
 
   body {
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-feature-settings: 'kern' 1, 'liga' 1;
     background-color: var(--color-cream);
     color: var(--color-ink);
@@ -115,15 +118,15 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-    font-weight: 400;
-    letter-spacing: 0;
+    font-family: var(--font-display), 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.015em;
     color: var(--color-ink);
     line-height: 1.15;
   }
 
   p {
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-weight: 400;
     color: var(--color-ink-soft);
     letter-spacing: 0.01em;
@@ -134,28 +137,28 @@
   /* Font utility classes            */
   /* ============================== */
   .font-display {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-    font-weight: 400;
-    letter-spacing: 0;
+    font-family: var(--font-display), 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.015em;
   }
   .font-accent {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-    font-style: italic;
-    font-weight: 400;
+    font-family: var(--font-body), 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 500;
   }
   .font-editorial {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display), 'Arial Narrow', sans-serif;
     font-weight: 400;
     line-height: 1.8;
     letter-spacing: 0;
   }
   .font-body, .font-ui {
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-weight: 400;
   }
 
   .text-eyebrow {
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.25em;
@@ -163,25 +166,25 @@
     color: var(--color-terracotta);
   }
   .text-display-thin {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-    font-weight: 400;
-    letter-spacing: 0;
+    font-family: var(--font-display), 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.015em;
   }
   .text-display-wide {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display), 'Arial Narrow', sans-serif;
     font-weight: 400;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
   .text-body-relaxed {
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-weight: 400;
     line-height: 1.8;
     letter-spacing: 0.01em;
     color: var(--color-ink-soft);
   }
   .text-caption {
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-weight: 500;
     font-size: 0.75rem;
     letter-spacing: 0.08em;
@@ -189,21 +192,21 @@
     color: var(--color-ink-faint);
   }
   .text-optical-h1 {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display), 'Arial Narrow', sans-serif;
     font-weight: 400;
     font-size: clamp(2.5rem, 8vw, 5rem);
     letter-spacing: 0;
     line-height: 1.05;
   }
   .text-optical-h2 {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display), 'Arial Narrow', sans-serif;
     font-weight: 400;
     font-size: clamp(1.75rem, 4vw, 2.75rem);
     letter-spacing: 0;
     line-height: 1.15;
   }
   .text-stat-number {
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display), 'Arial Narrow', sans-serif;
     font-weight: 400;
     font-feature-settings: 'tnum' 1;
     letter-spacing: 0;
@@ -560,7 +563,7 @@
 
 .admin-ledger .admin-page-kicker {
   color: var(--admin-brass-soft);
-  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+  font-family: var(--font-body), 'Arial', sans-serif;
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -1108,7 +1111,7 @@
 
 .admin-ledger .admin-section-title {
   color: var(--admin-ink);
-  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  font-family: var(--font-display), 'Arial Narrow', sans-serif;
   font-size: 1.25rem;
   line-height: 1.2;
 }
@@ -1367,7 +1370,7 @@
     padding: 0.875rem 1.75rem;
     background-color: var(--color-ink);
     color: var(--color-cream);
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-size: 0.8125rem;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -1397,7 +1400,7 @@
     padding: 0.875rem 1.75rem;
     background-color: transparent;
     color: var(--color-ink);
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-size: 0.8125rem;
     font-weight: 500;
     letter-spacing: 0.1em;
@@ -1427,7 +1430,7 @@
     padding: 0.5rem 1.125rem;
     background-color: transparent;
     color: var(--color-ink-soft);
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-size: 0.875rem;
     font-weight: 500;
     border: 1px solid var(--color-warm-border);
@@ -1451,7 +1454,7 @@
   /* ============================== */
   .form-label {
     display: block;
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-weight: 500;
     font-size: 0.875rem;
     color: var(--color-ink);
@@ -1462,7 +1465,7 @@
     display: block;
     width: 100%;
     padding: 0.75rem 1rem;
-    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-family: var(--font-body), 'Arial', sans-serif;
     font-size: 0.9375rem;
     color: var(--color-ink);
     background-color: var(--color-surface);
@@ -1591,7 +1594,7 @@
   /* Drop cap for first letter of paragraph */
   .drop-cap::first-letter {
     float: left;
-    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-family: var(--font-display), 'Arial Narrow', sans-serif;
     font-size: 3.5em;
     line-height: 0.8;
     padding-right: 0.1em;
@@ -1712,17 +1715,17 @@
  * Intentionally not touched: text-cream and bg-cream opacity variants used
  * as always-light text/fills inside .textured-surface bands; gold accents;
  * anything inside .admin-ledger (already scoped). */
-.dark .bg-cream { background-color: #1a1f1a; }
-.dark .bg-cream-warm { background-color: #242a24; }
+.dark .bg-cream { background-color: #20231F; }
+.dark .bg-cream-warm { background-color: #2A2D27; }
 .dark .bg-white { background-color: #1f241f; }
 .dark .bg-white\/80 { background-color: rgba(31, 36, 31, 0.8); }
 .dark .bg-\[\#F8F2E7\] { background-color: #1f241f; }
 
-.dark .text-ink { color: #e8e4dc; }
-.dark .text-ink-soft { color: #ccc8be; }
-.dark .text-ink-faint { color: #9a9590; }
+.dark .text-ink { color: #FFF4DF; }
+.dark .text-ink-soft { color: #DDD2BD; }
+.dark .text-ink-faint { color: #B1AD9F; }
 
-.dark .border-warm-border { border-color: #3a3830; }
+.dark .border-warm-border { border-color: #494C40; }
 
 /* Member area (portal + members pages, marked with .member-area). Its nav,
  * dashboard cards, dividers and buttons use OPACITY-modified palette utilities
@@ -1730,12 +1733,12 @@
  * page-surface patches above don't cover, so they stayed light on the dark
  * page. Re-map them to dark surfaces here. Scoped to .member-area so the
  * .admin-ledger theme and the public/auth pages are untouched. Card surfaces
- * lift to #222822 (above the #1a1f1a page) so cards still read as cards. */
+ * lift to #2A2D27 (above the #20231F page) so cards still read as cards. */
 .dark .member-area .bg-white\/85 { background-color: rgba(31, 36, 31, 0.9); }
 .dark .member-area .bg-cream,
 .dark .member-area .bg-cream\/80,
 .dark .member-area .bg-cream\/70,
-.dark .member-area .bg-cream\/60 { background-color: #222822; }
+.dark .member-area .bg-cream\/60 { background-color: #2A2D27; }
 .dark .member-area .bg-tan\/40,
 .dark .member-area .bg-tan\/30,
 .dark .member-area .bg-tan\/25 { background-color: rgba(255, 255, 255, 0.07); }
@@ -1746,8 +1749,8 @@
 
 /* Hover states that swap to cream + ink (e.g. .cta-secondary on dark bands)
  * stay readable: bg becomes the new dark-cream, text the new light-ink. */
-.dark .hover\:bg-cream:hover { background-color: #1a1f1a; }
-.dark .hover\:text-ink:hover { color: #e8e4dc; }
+.dark .hover\:bg-cream:hover { background-color: #20231F; }
+.dark .hover\:text-ink:hover { color: #FFF4DF; }
 
 /* `--color-cream`, `--color-cream-rgb`, `--color-tan-50` flip dark for
  * page-surface bg usage, but are also used as always-light parchment text
@@ -1758,9 +1761,9 @@
 .dark .section-contrast,
 .dark .textured-surface,
 .dark .dark-band {
-  --color-cream: #FAF7F0;
-  --color-cream-rgb: 250, 247, 240;
-  --color-tan-50: 250, 247, 240;
+  --color-cream: #FFF4DF;
+  --color-cream-rgb: 255, 244, 223;
+  --color-tan-50: 255, 244, 223;
 }
 
 /* Soft band, dark mode: a green one step lighter than the sage .section-contrast
@@ -1783,60 +1786,54 @@
     url('/images/texture.webp') center / cover;
 }
 
-/* Site footer band. Light mode: light radiates from the centre, dark in the
- * corners, revealing the texture. Dark mode: a diagonal deep-green
- * gradient (~18% darker than light), corners dark. Same in both: light text. */
-.footer-band {
-  background:
-    radial-gradient(85% 75% at 50% 42%, rgba(185, 148, 67, 0.10) 0%, rgba(185, 148, 67, 0) 50%),
-    radial-gradient(125% 125% at 50% 45%, rgba(34, 62, 50, 0.5) 0%, rgba(16, 34, 27, 0.72) 48%, rgba(7, 16, 12, 0.98) 88%),
-    url('/images/texture.webp') center / cover;
-}
+/* Charcoal footer with a simple sun-yellow edge. */
+.footer-band,
 .dark .footer-band {
-  background:
-    radial-gradient(90% 70% at 50% -12%, rgba(185, 148, 67, 0.12) 0%, rgba(185, 148, 67, 0) 55%),
-    radial-gradient(130% 120% at 68% 32%, rgba(24, 46, 37, 0.42) 0%, rgba(24, 46, 37, 0) 52%),
-    linear-gradient(135deg, rgba(5, 12, 9, 0.98) 0%, rgba(12, 27, 21, 0.78) 50%, rgba(6, 15, 11, 0.99) 100%),
-    url('/images/texture.webp') center / cover;
+  background: #232722;
+  border-top: 4px solid #F3CC61;
+  --color-cream: #FFF4DF;
+  --color-cream-rgb: 255, 244, 223;
+  --color-gold: #F3CC61;
+  --color-gold-muted: #F3CC61;
 }
 
 /* Dark-mode CTA overrides. cta-primary inverts from ink → gold so it stays
  * the high-contrast "primary action" on dark backgrounds. cta-secondary
  * brightens its border + text so the outline reads on dark surfaces. */
 .dark .cta-primary {
-  background-color: #c4a94d;
+  background-color: #F3CC61;
   color: #17120E;
-  border-color: #c4a94d;
+  border-color: #F3CC61;
 }
 .dark .cta-primary:hover {
   background-color: #8B6B2E;
   border-color: #8B6B2E;
-  color: #FAF7F0;
-  box-shadow: 0 8px 20px rgba(196, 169, 77, 0.28);
+  color: #FFF4DF;
+  box-shadow: 0 8px 20px rgba(243, 204, 97, 0.28);
 }
 
 .dark .cta-secondary {
-  color: #e8e4dc;
-  border-color: rgba(232, 228, 220, 0.5);
+  color: #FFF4DF;
+  border-color: rgba(255, 244, 223, 0.5);
 }
 .dark .cta-secondary:hover {
-  background-color: rgba(232, 228, 220, 0.1);
-  border-color: rgba(232, 228, 220, 0.95);
-  color: #FAF7F0;
+  background-color: rgba(255, 244, 223, 0.1);
+  border-color: rgba(255, 244, 223, 0.95);
+  color: #FFF4DF;
 }
 
 .dark .filter-pill {
-  color: #ccc8be;
-  border-color: rgba(232, 228, 220, 0.25);
+  color: #DDD2BD;
+  border-color: rgba(255, 244, 223, 0.25);
 }
 .dark .filter-pill:hover {
-  color: #e8e4dc;
-  border-color: rgba(232, 228, 220, 0.6);
+  color: #FFF4DF;
+  border-color: rgba(255, 244, 223, 0.6);
 }
 .dark .filter-pill.is-active,
 .dark .filter-pill[aria-selected="true"] {
-  background-color: #c4a94d;
-  border-color: #c4a94d;
+  background-color: #F3CC61;
+  border-color: #F3CC61;
   color: #17120E;
 }
 
@@ -1853,8 +1850,8 @@ footer .cta-secondary,
 .textured-surface .filter-pill,
 .dark-band .filter-pill,
 footer .filter-pill {
-  color: rgba(250, 247, 240, 0.78);
-  border-color: rgba(250, 247, 240, 0.32);
+  color: rgba(255, 244, 223, 0.78);
+  border-color: rgba(255, 244, 223, 0.32);
 }
 .section-contrast .cta-secondary:hover,
 .textured-surface .cta-secondary:hover,
@@ -1864,9 +1861,9 @@ footer .cta-secondary:hover,
 .textured-surface .filter-pill:hover,
 .dark-band .filter-pill:hover,
 footer .filter-pill:hover {
-  background-color: rgba(250, 247, 240, 0.1);
-  border-color: rgba(250, 247, 240, 0.75);
-  color: #FAF7F0;
+  background-color: rgba(255, 244, 223, 0.1);
+  border-color: rgba(255, 244, 223, 0.75);
+  color: #FFF4DF;
 }
 .section-contrast .filter-pill.is-active,
 .section-contrast .filter-pill[aria-selected="true"],
@@ -1896,13 +1893,13 @@ footer .filter-pill[aria-selected="true"] {
   color: #2C2416;
 }
 .dark .section-contrast--soft .filter-pill {
-  color: rgba(250, 247, 240, 0.78);
-  border-color: rgba(250, 247, 240, 0.32);
+  color: rgba(255, 244, 223, 0.78);
+  border-color: rgba(255, 244, 223, 0.32);
 }
 .dark .section-contrast--soft .filter-pill:hover {
-  background-color: rgba(250, 247, 240, 0.1);
-  border-color: rgba(250, 247, 240, 0.75);
-  color: #FAF7F0;
+  background-color: rgba(255, 244, 223, 0.1);
+  border-color: rgba(255, 244, 223, 0.75);
+  color: #FFF4DF;
 }
 
 /* iOS Safari auto-zooms the page when a focused input renders under 16px and
