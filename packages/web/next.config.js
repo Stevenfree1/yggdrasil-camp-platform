@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Members-only hub. Public marketing + applications live on yggdrasil.camp.
+  async redirects() {
+    return [
+      // No public landing here: send everyone to the member portal
+      // (which bounces to /login when signed out).
+      { source: '/', destination: '/members', permanent: false },
+      // Applications happen on the public site, not here.
+      { source: '/apply', destination: 'https://yggdrasil.camp/apply/burning-man', permanent: false },
+    ];
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
