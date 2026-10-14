@@ -57,9 +57,9 @@ export default function PortalShiftsPage() {
   if (!d.signupOpen) {
     return (
       <div className="luxury-card p-8 text-center">
-        <Lock className="mx-auto h-8 w-8 text-ink/30" />
+        <Lock className="mx-auto h-8 w-8 text-ink/65" />
         <h1 className="mt-3 font-display text-xl text-ink">Shift signup is not open yet</h1>
-        <p className="mx-auto mt-1 max-w-md text-sm text-ink/60">
+        <p className="mx-auto mt-1 max-w-md text-sm text-ink/80">
           The schedule is still being put together. You will be able to pick your shifts here as
           soon as it opens.
         </p>
@@ -74,7 +74,7 @@ export default function PortalShiftsPage() {
   const cell = (inst: Instance | undefined, full = false) => {
     if (!inst) {
       return (
-        <span className="text-ink/25" aria-label="does not run">
+        <span className="text-ink/65" aria-label="does not run">
           –
         </span>
       );
@@ -85,7 +85,7 @@ export default function PortalShiftsPage() {
       const who = inst.seasonMember?.member.playaName || inst.seasonMember?.member.name;
       return (
         <span
-          className={`block truncate text-xs text-ink/45 ${full ? '' : 'px-1.5 py-1'}`}
+          className={`block truncate text-xs text-ink/70 ${full ? '' : 'px-1.5 py-1'}`}
           title={inst.seasonMember?.member.name}
         >
           {who}
@@ -105,7 +105,7 @@ export default function PortalShiftsPage() {
         } ${
           mine
             ? 'bg-gold/20 text-ink hover:bg-gold/30'
-            : 'border border-dashed border-warm-border text-ink/45 hover:bg-cream/60'
+            : 'border border-dashed border-warm-border text-ink/70 hover:bg-cream/60'
         }`}
         title={mine ? 'Yours — tap to give it up' : 'Sign up'}
       >
@@ -126,7 +126,7 @@ export default function PortalShiftsPage() {
           <ClipboardList className="h-6 w-6 text-gold" />
           Shifts
         </h1>
-        <p className="mt-1 text-sm text-ink/70">
+        <p className="mt-1 text-sm text-ink/85">
           You have signed up for{' '}
           <strong className="tabular-nums">
             {d.myCount} of {d.min}
@@ -138,7 +138,7 @@ export default function PortalShiftsPage() {
               Thank you
             </span>
           ) : (
-            <span className="text-ink/60">Pick any open slot below.</span>
+            <span className="text-ink/80">Pick any open slot below.</span>
           )}
         </p>
       </div>
@@ -151,7 +151,7 @@ export default function PortalShiftsPage() {
       )}
 
       {d.blocks.length === 0 && (
-        <div className="luxury-card p-6 text-center text-sm text-ink/60">
+        <div className="luxury-card p-6 text-center text-sm text-ink/80">
           No shifts have been published yet.
         </div>
       )}
@@ -174,8 +174,8 @@ export default function PortalShiftsPage() {
                   onClick={() => setDay(date)}
                   className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium ${
                     on
-                      ? 'bg-ink text-cream'
-                      : 'border border-warm-border text-ink/70 hover:bg-cream/60'
+                      ? 'bg-gold text-[#1a2a1a]'
+                      : 'border border-warm-border text-ink/85 hover:bg-cream/60'
                   }`}
                 >
                   {formatDayShort(`${date}T12:00:00.000Z`)}
@@ -195,12 +195,12 @@ export default function PortalShiftsPage() {
                   <div className="border-b border-warm-border px-4 py-2.5">
                     <h2 className="font-display text-base text-ink">
                       {block.name}{' '}
-                      <span className="text-sm font-normal tabular-nums text-ink/50">
+                      <span className="text-sm font-normal tabular-nums text-ink/75">
                         {block.startTime}–{block.endTime}
                       </span>
                     </h2>
                     {block.notes && (
-                      <p className="mt-0.5 text-xs leading-snug text-ink/60">{block.notes}</p>
+                      <p className="mt-0.5 text-xs leading-snug text-ink/80">{block.notes}</p>
                     )}
                   </div>
                   <ul className="divide-y divide-warm-border">
@@ -209,7 +209,7 @@ export default function PortalShiftsPage() {
                         <span className="min-w-0 flex-1">
                           <span className="block text-sm text-ink">{slot.label}</span>
                           {slot.requirement && (
-                            <span className="block text-[11px] leading-snug text-ink/50">
+                            <span className="block text-[11px] leading-snug text-ink/75">
                               {slot.requirement}
                             </span>
                           )}
@@ -232,22 +232,22 @@ export default function PortalShiftsPage() {
             <div className="border-b border-warm-border px-4 py-3">
               <h2 className="font-display text-lg text-ink">
                 {block.name}{' '}
-                <span className="text-sm font-normal tabular-nums text-ink/50">
+                <span className="text-sm font-normal tabular-nums text-ink/75">
                   {block.startTime}–{block.endTime}
                 </span>
               </h2>
-              {block.notes && <p className="text-sm text-ink/60">{block.notes}</p>}
+              {block.notes && <p className="text-sm text-ink/80">{block.notes}</p>}
             </div>
             <table className="w-full min-w-[640px] border-collapse text-sm">
               <thead>
                 <tr>
-                  <th className="sticky left-0 z-10 bg-cream px-3 py-2 text-left text-xs uppercase tracking-wide text-ink/50">
+                  <th className="sticky left-0 z-10 bg-cream px-3 py-2 text-left text-xs uppercase tracking-wide text-ink/75">
                     Slot
                   </th>
                   {d.dates.map((date) => (
                     <th
                       key={date}
-                      className="px-2 py-2 text-center text-xs uppercase tracking-wide text-ink/50"
+                      className="px-2 py-2 text-center text-xs uppercase tracking-wide text-ink/75"
                     >
                       {formatDayShort(`${date}T12:00:00.000Z`)}
                     </th>
@@ -263,7 +263,7 @@ export default function PortalShiftsPage() {
                     >
                       {slot.label}
                       {slot.requirement && (
-                        <span className="block max-w-[260px] text-[11px] leading-snug text-ink/50">
+                        <span className="block max-w-[260px] text-[11px] leading-snug text-ink/75">
                           {slot.requirement}
                         </span>
                       )}

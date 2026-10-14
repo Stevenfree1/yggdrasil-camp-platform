@@ -124,7 +124,7 @@ export function MyHousingCard() {
                   className={`rounded border px-3 py-2 text-left transition-colors ${
                     active
                       ? 'border-gold bg-gold/15 text-ink'
-                      : 'border-warm-border text-ink/70 hover:bg-cream/60'
+                      : 'border-warm-border text-ink/85 hover:bg-cream/60'
                   }`}
                 >
                   <span className="block text-sm font-medium">{opt.label}</span>
@@ -168,7 +168,7 @@ export function MyHousingCard() {
                     className={`rounded border px-2 py-2 text-center text-sm transition-colors ${
                       active
                         ? 'border-gold bg-gold/15 text-ink font-medium'
-                        : 'border-warm-border text-ink/70 hover:bg-cream/60'
+                        : 'border-warm-border text-ink/85 hover:bg-cream/60'
                     }`}
                   >
                     {opt.label}

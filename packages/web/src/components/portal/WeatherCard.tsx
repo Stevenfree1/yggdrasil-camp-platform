@@ -29,8 +29,8 @@ function shortStamp(d: Date): string {
 
 function Chip({ label, value }: { label: string; value: string }) {
   return (
-    <span className="inline-flex items-baseline gap-1 rounded-full border border-warm-border bg-cream/60 px-2 py-0.5 text-[11px] text-ink/70">
-      <span className="uppercase tracking-wide text-ink/45">{label}</span>
+    <span className="inline-flex items-baseline gap-1 rounded-full border border-warm-border bg-cream/60 px-2 py-0.5 text-[11px] text-ink/85">
+      <span className="uppercase tracking-wide text-ink/70">{label}</span>
       <span className="font-medium tabular-nums text-ink/80">{value}</span>
     </span>
   );
@@ -52,7 +52,7 @@ function PeriodRow({
           {period.precipPct !== undefined && <Chip label="Rain" value={`${period.precipPct}%`} />}
         </div>
       </div>
-      <p className="mt-1 text-[13px] leading-relaxed text-ink/60">{period.text}</p>
+      <p className="mt-1 text-[13px] leading-relaxed text-ink/80">{period.text}</p>
     </div>
   );
 }
@@ -91,7 +91,7 @@ export function WeatherCard() {
         <CloudSun className="h-4 w-4 shrink-0 text-gold" />
         <span className="min-w-0 truncate text-sm">
           <span className="font-medium text-ink">BRC weather</span>
-          {summary && <span className="text-ink/60"> · {summary}</span>}
+          {summary && <span className="text-ink/80"> · {summary}</span>}
         </span>
         {d.advisories.length > 0 && (
           <span title="Weather advisory in effect">
@@ -99,20 +99,20 @@ export function WeatherCard() {
           </span>
         )}
         <ChevronDown
-          className={`ml-auto h-4 w-4 shrink-0 text-ink/45 transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`ml-auto h-4 w-4 shrink-0 text-ink/70 transition-transform ${open ? 'rotate-180' : ''}`}
         />
       </button>
 
       {open && (
         <>
           <div className="border-t border-warm-border px-4 py-2 sm:px-5">
-            <p className="text-[11px] text-ink/50">
+            <p className="text-[11px] text-ink/75">
               Updated {shortStamp(d.updatedAt)} PT ·{' '}
               <a
                 href="http://brcweather.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline decoration-ink/20 underline-offset-2 hover:text-ink/70"
+                className="underline decoration-ink/20 underline-offset-2 hover:text-ink/85"
               >
                 Burning Man&rsquo;s official forecast
               </a>
@@ -141,7 +141,7 @@ export function WeatherCard() {
           </div>
 
           {d.disclaimer && (
-            <p className="border-t border-warm-border px-4 py-2.5 text-[10px] leading-snug text-ink/35 sm:px-5">
+            <p className="border-t border-warm-border px-4 py-2.5 text-[10px] leading-snug text-ink/65 sm:px-5">
               {d.disclaimer}
             </p>
           )}

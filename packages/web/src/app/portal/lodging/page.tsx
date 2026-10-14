@@ -8,7 +8,7 @@ const PortalLodgingView = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex items-center gap-2 p-8 text-ink/60">
+      <div className="flex items-center gap-2 p-8 text-ink/80">
         <Loader2 className="w-4 h-4 animate-spin" /> Loading map…
       </div>
     ),

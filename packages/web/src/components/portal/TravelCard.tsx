@@ -141,7 +141,7 @@ export function TravelCard() {
         {filled && !editing && (
           <button
             onClick={startEdit}
-            className="inline-flex items-center gap-1 text-xs font-medium text-ink/60 hover:text-ink"
+            className="inline-flex items-center gap-1 text-xs font-medium text-ink/80 hover:text-ink"
           >
             <Pencil className="h-3.5 w-3.5" />
             Edit
@@ -238,12 +238,12 @@ export function TravelCard() {
               {save.isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : filled ? 'Save' : 'Save & unlock'}
             </button>
             {editing && (
-              <button onClick={() => setEditing(false)} className="text-sm text-ink/60 hover:text-ink">
+              <button onClick={() => setEditing(false)} className="text-sm text-ink/80 hover:text-ink">
                 Cancel
               </button>
             )}
             {!filled && (
-              <span className="inline-flex items-center gap-1 text-xs text-ink/45">
+              <span className="inline-flex items-center gap-1 text-xs text-ink/70">
                 <Lock className="h-3.5 w-3.5" />
                 Wallpapers locked
               </span>
@@ -254,34 +254,34 @@ export function TravelCard() {
         <div className="px-4 py-4 sm:px-5">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm text-ink/80">
             <span className="inline-flex items-center gap-1.5">
-              <CalendarRange className="h-4 w-4 text-ink/40" />
+              <CalendarRange className="h-4 w-4 text-ink/70" />
               {formatDateOnly(sm.arrivalDate)}
               {sm.arrivalWindow && (
-                <span className="text-ink/50">{WINDOWS.find((w) => w.value === sm.arrivalWindow)?.label.toLowerCase()}</span>
+                <span className="text-ink/75">{WINDOWS.find((w) => w.value === sm.arrivalWindow)?.label.toLowerCase()}</span>
               )}
               {' → '}
               {formatDateOnly(sm.departureDate)}
               {sm.departureWindow && (
-                <span className="text-ink/50">{WINDOWS.find((w) => w.value === sm.departureWindow)?.label.toLowerCase()}</span>
+                <span className="text-ink/75">{WINDOWS.find((w) => w.value === sm.departureWindow)?.label.toLowerCase()}</span>
               )}
             </span>
             <span className="inline-flex items-center gap-1.5">
               {sm.travelMode === 'FLYING' || sm.travelMode === 'BURNER_EXPRESS' ? (
-                <Plane className="h-4 w-4 text-ink/40" />
+                <Plane className="h-4 w-4 text-ink/70" />
               ) : (
-                <Car className="h-4 w-4 text-ink/40" />
+                <Car className="h-4 w-4 text-ink/70" />
               )}
               {MODES.find((m) => m.value === sm.travelMode)?.label ?? sm.travelMode}
             </span>
-            <span className="text-ink/60">{RIDE.find((r) => r.value === sm.rideStatus)?.label}</span>
+            <span className="text-ink/80">{RIDE.find((r) => r.value === sm.rideStatus)?.label}</span>
           </div>
-          {sm.rideDetails && <p className="mt-1.5 text-[13px] text-ink/55">{sm.rideDetails}</p>}
+          {sm.rideDetails && <p className="mt-1.5 text-[13px] text-ink/80">{sm.rideDetails}</p>}
         </div>
       )}
 
       {/* the gift — revealed once travel plans are in */}
       {filled && (
-        <div className="border-t border-warm-border bg-ink px-4 py-4 sm:px-5">
+        <div className="border-t border-[#2f5a42] bg-[#0f2a1e] px-4 py-4 sm:px-5">
           <p className="inline-flex items-center gap-2 text-sm font-medium text-gold">
             <Sparkles className="h-4 w-4" />
             Wallpapers unlocked — thank you!
