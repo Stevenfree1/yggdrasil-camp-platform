@@ -47,21 +47,21 @@ export const contentConfig: ContentConfig = {
           title: 'The world-tree',
           description:
             'A hand-built tree of steel and canopy that throws real shade over the glade. Our landmark and our shelter, raised by the whole camp.',
-          image: { src: '/images/camp-day.jpg', alt: 'The Yggdrasil world-tree' },
+          image: { src: '/images/camp-day.jpg', alt: 'A woven canopy in the Nordic forest at The Borderland' },
           icon: 'sun',
         },
         {
           title: 'The glade',
           description:
             'Rugs, low light, and shade deep enough to rest under. Runes to draw, intentions tied to the branches, open to everyone walking by.',
-          image: { src: '/images/lounge.jpg', alt: 'The Nordic forest glade at The Borderland' },
+          image: { src: '/images/lounge.jpg', alt: 'The Yggdrasil rune banner in the gathering tipi' },
           icon: 'book-open',
         },
         {
           title: 'The circle',
           description:
             'Every root builds, runs, and strikes the camp. No service tiers, no spectators. We take it down together and leave no trace.',
-          image: { src: '/images/build-crew.webp', alt: 'The circle raising the world-tree during build week' },
+          image: { src: '/images/build-crew.jpg', alt: 'The circle gathered around the fire at The Borderland' },
           icon: 'hammer',
         },
       ],
@@ -97,7 +97,7 @@ export const contentConfig: ContentConfig = {
       title: 'Come build it with us',
       description:
         "Whether this is your first burn or your fifteenth, if you want to help raise a tree and hold a circle where people feel met, we would love to hear from you. And because nothing grows on the playa, our gift reaches past it: we plant trees around the world in the camp's name.",
-      image: { src: '/images/camp-night.webp', alt: `${camp} lit up at night under the tree` },
+      image: { src: '/images/camp-night.jpg', alt: `The Borderland burn at night` },
       cta: {
         primary: { text: 'Apply to join', link: '/apply', icon: 'arrow-right' },
         secondary: { text: 'Member login', link: '/login' },
