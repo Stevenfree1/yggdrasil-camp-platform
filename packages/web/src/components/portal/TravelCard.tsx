@@ -61,8 +61,8 @@ type TravelWindow = (typeof WINDOWS)[number]['value'];
 const chip = (on: boolean) =>
   `rounded-full border px-3 py-1.5 text-xs font-medium transition-colors ${
     on
-      ? 'border-gold bg-gold/20 text-ink'
-      : 'border-warm-border text-ink/60 hover:bg-cream/60'
+      ? 'border-gold bg-gold/25 text-[#f5e6c8]'
+      : 'border-[#4a7c59] text-[#f5e6c8]/85 hover:border-gold hover:text-gold'
   }`;
 
 export function TravelCard() {
@@ -152,7 +152,7 @@ export function TravelCard() {
       {showForm ? (
         <div className="space-y-4 px-4 py-4 sm:px-5">
           {!filled && (
-            <p className="flex items-start gap-2 rounded border border-gold/40 bg-gold/10 px-3 py-2 text-[13px] leading-snug text-ink/80">
+            <p className="flex items-start gap-2 rounded border border-gold/50 bg-gold/15 px-3 py-2 text-[13px] leading-snug text-[#f5e6c8]">
               <Gift className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
               <span>
                 Tell us your travel plans — 30 seconds — and unlock the{' '}
