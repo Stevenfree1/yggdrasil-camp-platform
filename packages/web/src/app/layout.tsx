@@ -37,8 +37,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f5efe0' },
-    { media: '(prefers-color-scheme: dark)', color: '#1a2214' },
+    { media: '(prefers-color-scheme: light)', color: '#122a1f' },
+    { media: '(prefers-color-scheme: dark)', color: '#122a1f' },
   ],
 };
 
@@ -57,7 +57,7 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} forcedTheme="dark">
           <MotionProvider>
             <TrpcProvider>
               <AuthProvider>

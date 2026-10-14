@@ -75,28 +75,28 @@
   }
 
   .dark {
-    --color-cream: #141A10;
-    --color-cream-warm: #20261C;
-    --color-ink: #F5EFE0;
-    --color-ink-rgb: 245, 239, 224;
-    --color-ink-soft: #DDD2BD;
-    --color-ink-faint: #B1AD9F;
-    --color-gold: #C9A84C;
-    --color-gold-muted: #C9A84C;
-    --color-terracotta: #5A9270;
-    --color-terracotta-rgb: 238, 149, 116;
-    --color-gold-rgb: 243, 204, 97;
-    --color-cream-rgb: 32, 35, 31;
-    --color-sage: #4A7C59;
-    --color-warm-border: #494C40;
-    --color-line-rgb: 73, 76, 64;
-    --color-tan-50: 32, 35, 31;
-    --color-surface: #20261C;
-    --color-surface-alt: #30342C;
-    --color-success: #4caf50;
-    --color-warning: #C9A84C;
-    --color-error: #e05a4f;
-    --color-info: #5a8fa8;
+    --color-cream: #122a1f;
+    --color-cream-warm: #19382a;
+    --color-ink: #f5e6c8;
+    --color-ink-rgb: 245, 230, 200;
+    --color-ink-soft: #e8d5b0;
+    --color-ink-faint: #c8d5cb;
+    --color-gold: #c9a84c;
+    --color-gold-muted: #e8c56a;
+    --color-terracotta: #e8c56a;
+    --color-terracotta-rgb: 232, 197, 106;
+    --color-gold-rgb: 201, 168, 76;
+    --color-cream-rgb: 18, 42, 31;
+    --color-sage: #6b9e3a;
+    --color-warm-border: #2f5a42;
+    --color-line-rgb: 47, 90, 66;
+    --color-tan-50: 18, 42, 31;
+    --color-surface: #19382a;
+    --color-surface-alt: #1f4030;
+    --color-success: #6b9e3a;
+    --color-warning: #e8c56a;
+    --color-error: #d9775f;
+    --color-info: #8fc0a9;
   }
 
   ::selection {
