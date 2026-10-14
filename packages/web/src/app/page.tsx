@@ -132,6 +132,47 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Sound journey ────────────────────────────────────── */}
+      <section className="section-base">
+        <div className="section-contained">
+          <Reveal direction="up" className="mx-auto max-w-2xl text-center">
+            <p className="text-eyebrow mb-4">Before you apply</p>
+            <h2 className="font-display text-3xl md:text-5xl" style={{ color: 'var(--color-ink)' }}>
+              The sound journey
+            </h2>
+            <p className="text-body-relaxed mt-5 text-lg" style={{ color: 'var(--color-ink-soft)' }}>
+              Put something in your ears, close your eyes, and feel what we are trying to create.
+              This is the journey Yggdrasil is built around.
+            </p>
+          </Reveal>
+          <Reveal direction="up" delay={0.1} className="mt-12 flex flex-col items-center">
+            <div
+              className="w-full max-w-[400px] overflow-hidden rounded-lg border"
+              style={{ borderColor: 'var(--color-warm-border)' }}
+            >
+              <iframe
+                src="https://www.instagram.com/reel/CsoV7qhAeTJ/embed"
+                title="Yggdrasil sound journey"
+                className="w-full"
+                style={{ height: 640, border: 0 }}
+                loading="lazy"
+                allow="encrypted-media; clipboard-write; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+            <a
+              href="https://www.instagram.com/reel/CsoV7qhAeTJ/"
+              target="_blank"
+              rel="noopener"
+              className="mt-4 text-sm underline underline-offset-4"
+              style={{ color: 'var(--color-gold)' }}
+            >
+              Open the sound journey on Instagram
+            </a>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── How joining works ────────────────────────────────── */}
       <section className="camp-joining section-alt">
         <div className="section-contained">
