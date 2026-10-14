@@ -5,40 +5,40 @@ import { CampConfig } from './types';
  *
  * This is the single place the camp's name, contact details, and URLs live.
  * Server code (emails, payment descriptions, exports) and UI both read from
- * here, so renaming the camp is a one-file change. The values below describe
- * a fictional demo camp; replace them with your own.
+ * here, so renaming the camp is a one-file change.
  */
 export const campConfig: CampConfig = {
   // Basic info
-  name: 'Camp Dust Devil',
-  shortName: 'Dust Devil',
-  memberNoun: { singular: 'camper', plural: 'campers' },
-  tagline: 'Shade, coffee, and good company on the playa.',
+  name: 'Camp Yggdrasil',
+  shortName: 'Yggdrasil',
+  memberNoun: { singular: 'root', plural: 'roots' },
+  tagline: 'Shade, story, and a circle under the tree.',
   description:
-    'Camp Dust Devil is a Burning Man theme camp built around a 24-hour coffee bar, a shaded lounge, and a crew that shows up for each other before, during, and after the burn.',
-  foundingYear: 2018,
+    'Camp Yggdrasil is a Burning Man theme camp built around a hand-raised world-tree that casts real shade, a glade to gather in, and a small circle that builds it together and takes it down together, leaving no trace.',
+  foundingYear: 2023,
 
   // Organization. Set taxStatus to undefined if the camp is not a registered
   // nonprofit; donation receipts and tax-deductibility copy key off it.
-  legalName: 'Camp Dust Devil',
+  legalName: 'Camp Yggdrasil',
   taxStatus: undefined, // e.g. '501(c)(3)'
   ein: undefined,
 
   // Contact
-  email: 'hello@example.org',
+  email: 'andromeda@yggdrasil.camp',
   phone: undefined,
   location: 'Black Rock City, NV',
 
   // URLs. APP_URL (env) wins at runtime; this is the fallback.
-  website: process.env.APP_URL || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3006',
-  domain: 'example.org',
+  website: process.env.APP_URL || process.env.NEXT_PUBLIC_APP_URL || 'https://yggdrasil.camp',
+  domain: 'yggdrasil.camp',
 
-  // Black Rock City address (lodging-map compass). Update yearly after placement.
+  // Black Rock City address (lodging-map compass). PLACEHOLDER — update after
+  // 2027 placement comes out.
   brcPlacement: { clock: '7:30', street: 'D' },
 
   // Social media (leave undefined to hide)
   social: {
-    instagram: undefined,
+    instagram: 'https://instagram.com/camp.yggdrasil',
     facebook: undefined,
     twitter: undefined,
     youtube: undefined,

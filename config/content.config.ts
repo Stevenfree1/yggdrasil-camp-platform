@@ -5,19 +5,17 @@ import { campConfig } from './camp.config';
  * Site copy.
  *
  * Every user-facing sentence on the public landing page, the /members login
- * page, the /apply form, the nav, and the footer lives here. Rewrite it in
- * your camp's voice. Values that are facts about the camp (name, email,
- * location) come from camp.config.ts so they only live in one place.
+ * page, the /apply form, the nav, and the footer lives here. Values that are
+ * facts about the camp (name, email, location) come from camp.config.ts so
+ * they only live in one place.
  *
- * Images point at files in packages/web/public/images. Replace those files
- * (same names) or change the paths here. Keep photos at or under ~2048px on
- * the long edge, as WebP or JPEG.
- *
- * Icon keys are lucide icon names registered in packages/web/src/lib/icons.ts.
+ * Images point at files in packages/web/public/images. Icon keys are lucide
+ * icon names registered in packages/web/src/lib/icons.ts.
  */
 
 const camp = campConfig.name;
 const members = campConfig.memberNoun.plural;
+const member = campConfig.memberNoun.singular;
 
 export const contentConfig: ContentConfig = {
   hero: {
@@ -26,10 +24,10 @@ export const contentConfig: ContentConfig = {
     titleLines: ['Camp', campConfig.shortName],
     subtitle: campConfig.tagline,
     description:
-      'A 24-hour coffee bar, a shaded lounge out of the afternoon sun, and a crew that builds it together every year.',
+      'A hand-raised world-tree that casts real shade, a glade to gather in, and a circle that builds it together and strikes it together, leaving no trace.',
     image: {
       src: '/images/hero.webp',
-      alt: `${camp} at golden hour on the playa`,
+      alt: `${camp} under the world-tree at golden hour on the playa`,
     },
     cta: {
       primary: { text: 'Apply to join', link: '/apply', icon: 'arrow-right' },
@@ -38,32 +36,32 @@ export const contentConfig: ContentConfig = {
   },
 
   home: {
-    fieldNotes: ['Coffee on.', 'Shade up.', 'Everybody pitches in.'],
+    fieldNotes: ['Tree raised.', 'Shade up.', 'Everybody builds.'],
     about: {
       eyebrow: 'What we do',
-      title: 'Coffee, shade, and a place to land',
+      title: 'Shade, story, and a place to land',
       description:
-        'We gift what we would want to find at 3pm in a dust storm or 4am on the way home: something hot to drink, a seat in the shade, and people glad to see you.',
+        'We raise a world-tree in the open playa and gather a circle beneath it. We gift what we would want to find at 3pm in a dust storm or 4am on the way home: real shade, a quiet place to sit, and people glad to see you.',
       cards: [
         {
-          title: 'The coffee bar',
+          title: 'The world-tree',
           description:
-            'Pour-over and cold brew, day and night, staffed by campers in short shifts. Bring your own cup.',
-          image: { src: '/images/camp-day.webp', alt: 'The coffee bar under shade during the day' },
-          icon: 'coffee',
-        },
-        {
-          title: 'The lounge',
-          description:
-            'Rugs, cushions, and shade cloth deep enough to nap under. Open to everyone walking by.',
-          image: { src: '/images/lounge.webp', alt: 'Cushions and rugs in the shaded lounge' },
+            'A hand-built tree of steel and canopy that throws real shade over the glade. Our landmark and our shelter, raised by the whole camp.',
+          image: { src: '/images/camp-day.webp', alt: 'The world-tree casting shade over the glade' },
           icon: 'sun',
         },
         {
-          title: 'The crew',
+          title: 'The glade',
           description:
-            'Every camper builds, runs, and strikes the camp. No service tiers, no spectators.',
-          image: { src: '/images/build-crew.webp', alt: 'Campers raising a shade structure during build week' },
+            'Rugs, low light, and shade deep enough to rest under. Runes to draw, intentions tied to the branches, open to everyone walking by.',
+          image: { src: '/images/lounge.webp', alt: 'Rugs and low light in the shaded glade' },
+          icon: 'book-open',
+        },
+        {
+          title: 'The circle',
+          description:
+            'Every root builds, runs, and strikes the camp. No service tiers, no spectators. We take it down together and leave no trace.',
+          image: { src: '/images/build-crew.webp', alt: 'The circle raising the world-tree during build week' },
           icon: 'hammer',
         },
       ],
@@ -80,7 +78,7 @@ export const contentConfig: ContentConfig = {
         },
         {
           title: 'Get approved',
-          description: 'Camp leads review every form and email you with next steps.',
+          description: 'Camp leads read every form and email you with next steps.',
           icon: 'clipboard-check',
         },
         {
@@ -90,7 +88,7 @@ export const contentConfig: ContentConfig = {
         },
         {
           title: 'Sign up for shifts',
-          description: 'Pick your build, bar, and strike shifts in the portal. Then pack.',
+          description: 'Pick your build, glade, and strike shifts in the portal. Then pack.',
           icon: 'calendar',
         },
       ],
@@ -98,8 +96,8 @@ export const contentConfig: ContentConfig = {
     closing: {
       title: 'Come build it with us',
       description:
-        'Whether this is your first burn or your fifteenth, if you like making a place where people feel welcome, we would love to hear from you.',
-      image: { src: '/images/camp-night.webp', alt: `${camp} lit up at night` },
+        'Whether this is your first burn or your fifteenth, if you want to help raise a tree and hold a circle where people feel met, we would love to hear from you.',
+      image: { src: '/images/camp-night.webp', alt: `${camp} lit up at night under the tree` },
       cta: {
         primary: { text: 'Apply to join', link: '/apply', icon: 'arrow-right' },
         secondary: { text: 'Member login', link: '/login' },
@@ -136,13 +134,13 @@ export const contentConfig: ContentConfig = {
         ],
       },
     ],
-    nonprofitBlurb: 'A nonprofit organization run entirely by volunteers.',
+    nonprofitBlurb: 'Built and struck by its roots. We plant trees beyond the playa and try to leave the land better than we found it.',
   },
 
   members: {
     eyebrow: 'Members area',
     title: `For ${members}`,
-    description: `Dues, shifts, housing, announcements, and everything else you need between now and strike. Sign in to get to your portal.`,
+    description: `Dues, shifts, housing, announcements, and everything else you need between now and strike. Sign in to reach your portal.`,
     highlights: [
       {
         title: 'Your portal',
@@ -151,7 +149,7 @@ export const contentConfig: ContentConfig = {
       },
       {
         title: 'Shifts',
-        description: 'Sign up for build, camp, and strike shifts and see who you are working with.',
+        description: 'Sign up for build, glade, and strike shifts and see who you are working with.',
         icon: 'calendar',
       },
       {
@@ -167,11 +165,11 @@ export const contentConfig: ContentConfig = {
     ],
     loginSection: {
       title: 'Member login',
-      subtitle: 'Already in camp? Sign in to reach your portal.',
+      subtitle: 'Already a root? Sign in to reach your portal.',
       emailLabel: 'Email',
       passwordLabel: 'Password',
       submitButton: 'Sign in',
-      notMemberText: 'Not a member yet?',
+      notMemberText: 'Not a root yet?',
       applyLinkText: 'Apply to join',
     },
   },
@@ -179,7 +177,7 @@ export const contentConfig: ContentConfig = {
   apply: {
     eyebrow: 'Join us',
     title: 'Interest form',
-    intro: `${camp} is a volunteer-run theme camp. Every member plays an active role in building, running, and striking the camp. Tell us a bit about yourself.`,
+    intro: `${camp} is a volunteer-run theme camp. Every ${member} builds, runs, and strikes the camp together. Tell us a bit about yourself, and feel into what you would want to bring to a circle under one tree.`,
     requirements: {
       title: 'What membership involves',
       items: [
@@ -192,13 +190,13 @@ export const contentConfig: ContentConfig = {
     },
     firstTimerYesLabel: 'Yes, first burn',
     contributionPrompt:
-      'Tell us how you have contributed to camps or communities before, or how you would like to help this year. We especially value people who step in without being asked.',
+      'We would rather not tell you what to bring. Feel into it: what would you want to give to a small circle under one tree in the desert? We especially value people who step in without being asked.',
     contributionPlaceholder:
-      'Examples: build crew · bar shifts · kitchen · MOOP / Leave No Trace · power & lighting · workshops · owning a project end to end.',
+      'Examples: build crew · tending the glade · kitchen · MOOP / Leave No Trace · power & lighting · ritual & story · owning a project end to end.',
     strikeNote: 'Plan to leave the playa only after strike is finished, usually the Sunday or Monday after the burn.',
     success: {
       title: 'Interest form received',
-      message: `Thank you for your interest in ${camp}. We review every form and will get back to you as soon as we can. Whatever happens, come find us on the playa.`,
+      message: `Thank you for your interest in ${camp}. We read every form, and we will check in with the Nordic gods to see if they are in favor, then get back to you. Whatever happens, come find us under the tree.`,
     },
   },
 };

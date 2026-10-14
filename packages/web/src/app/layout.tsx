@@ -2,7 +2,7 @@ import { ReactNode, Suspense } from "react";
 import type { Viewport } from 'next';
 import "../styles/globals.css";
 import "../styles/public-site.css";
-import { Barlow_Condensed, Space_Grotesk } from 'next/font/google';
+import { Cinzel, Inter } from 'next/font/google';
 import { ThemeProvider } from '../components/theme-provider';
 import { MotionProvider } from '../components/motion-provider';
 import { AuthProvider } from '../contexts/AuthContext';
@@ -13,15 +13,15 @@ import { pageMetadata } from '@/lib/metadata';
 import { Toaster } from 'sonner';
 import { GoogleAnalytics } from '@next/third-parties/google';
 
-const display = Barlow_Condensed({
+const display = Cinzel({
   subsets: ['latin'],
   variable: '--font-display',
-  weight: ['600', '700', '800'],
+  weight: ['500', '600', '700'],
   display: 'swap',
   preload: true,
 });
 
-const body = Space_Grotesk({
+const body = Inter({
   subsets: ['latin'],
   variable: '--font-body',
   weight: ['400', '500', '600', '700'],
@@ -37,8 +37,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FFF4DF' },
-    { media: '(prefers-color-scheme: dark)', color: '#232722' },
+    { media: '(prefers-color-scheme: light)', color: '#f5efe0' },
+    { media: '(prefers-color-scheme: dark)', color: '#1a2214' },
   ],
 };
 

@@ -22,42 +22,42 @@
 }
 
 .public-site .cta-primary {
-  background: #B44229;
-  color: #FFF4DF;
-  border-color: #B44229;
+  background: #2D5A3D;
+  color: #F5EFE0;
+  border-color: #2D5A3D;
   box-shadow: 3px 3px 0 var(--color-ink);
 }
 
 .public-site .cta-primary:hover {
-  background: #8C2F1C;
-  border-color: #8C2F1C;
+  background: #1A3A2A;
+  border-color: #1A3A2A;
   transform: translate(-1px, -1px);
   box-shadow: 4px 4px 0 var(--color-ink);
 }
 
 .public-site .cta-sun {
-  background: #F3CC61;
-  border-color: #F3CC61;
-  color: #252720;
-  box-shadow: 3px 3px 0 #702D21;
+  background: #C9A84C;
+  border-color: #C9A84C;
+  color: #1A2A1A;
+  box-shadow: 3px 3px 0 #183420;
 }
 
 .public-site .cta-sun:hover {
-  background: #FAE5A3;
-  border-color: #FAE5A3;
-  color: #252720;
-  box-shadow: 4px 4px 0 #702D21;
+  background: #E8C56A;
+  border-color: #E8C56A;
+  color: #1A2A1A;
+  box-shadow: 4px 4px 0 #183420;
 }
 
 .public-site .cta-on-dark {
-  color: #FFF4DF;
+  color: #F5EFE0;
   border-color: rgba(255,244,223,0.7);
 }
 
 .public-site .cta-on-dark:hover {
-  color: #252720;
-  background: #FFF4DF;
-  border-color: #FFF4DF;
+  color: #1A2A1A;
+  background: #F5EFE0;
+  border-color: #F5EFE0;
 }
 
 .public-site .luxury-card {
@@ -74,7 +74,7 @@
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   padding-top: 96px;
-  background: #B44229;
+  background: #2D5A3D;
 }
 
 .camp-hero-copy {
@@ -85,7 +85,7 @@
 
 .camp-hero-eyebrow {
   max-width: 32rem;
-  color: #FFF4DF;
+  color: #F5EFE0;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -95,7 +95,7 @@
 .camp-hero-title {
   margin-top: 1.5rem;
   max-width: 10ch;
-  color: #FFF4DF;
+  color: #F5EFE0;
   font-size: clamp(5rem, 8.8vw, 9rem);
   font-weight: 800 !important;
   line-height: 0.86;
@@ -106,7 +106,7 @@
 .camp-hero-tagline {
   margin-top: 1.75rem;
   max-width: 26rem;
-  color: #F3CC61;
+  color: #C9A84C;
   font-size: clamp(1.2rem, 1.7vw, 1.4rem);
   font-weight: 700;
   line-height: 1.45;
@@ -124,7 +124,7 @@
 .camp-hero-description {
   margin-top: 1rem;
   max-width: 28rem;
-  color: #FFF4DF;
+  color: #F5EFE0;
   font-size: 0.875rem;
   line-height: 1.7;
 }
@@ -132,7 +132,7 @@
 .camp-hero-photo {
   position: relative;
   min-height: 570px;
-  border-left: 3px solid #252720;
+  border-left: 3px solid #1A2A1A;
 }
 
 .camp-hero-photo > img { object-position: 65% center; }
@@ -145,11 +145,11 @@
   place-items: center;
   width: 92px;
   height: 92px;
-  background: #F3CC61;
-  color: #B44229;
-  border: 2px solid #252720;
+  background: #C9A84C;
+  color: #2D5A3D;
+  border: 2px solid #1A2A1A;
   border-radius: 50%;
-  box-shadow: 4px 4px 0 #252720;
+  box-shadow: 4px 4px 0 #1A2A1A;
   transform: rotate(12deg);
 }
 
@@ -161,8 +161,8 @@
   left: 1.5rem;
   margin-right: 1.5rem;
   padding: 0.5rem 0.75rem;
-  background: #FFF4DF;
-  color: #252720;
+  background: #F5EFE0;
+  color: #1A2A1A;
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -176,9 +176,9 @@
   justify-content: space-evenly;
   gap: 0.75rem 1.5rem;
   padding: 1.1rem 1.5rem;
-  border-block: 2px solid #252720;
-  background: #F3CC61;
-  color: #252720;
+  border-block: 2px solid #1A2A1A;
+  background: #C9A84C;
+  color: #1A2A1A;
   font-family: var(--font-display), 'Arial Narrow', sans-serif;
   font-size: clamp(1.2rem, 2.5vw, 1.75rem);
   font-weight: 700;
@@ -186,7 +186,7 @@
 }
 
 .camp-field-notes > span { display: flex; align-items: center; gap: 1rem; }
-.camp-field-notes > span > span { color: #B44229; }
+.camp-field-notes > span > span { color: #2D5A3D; }
 .camp-home .section-base,
 .camp-home .section-alt { padding-block: clamp(3.5rem, 7vw, 6rem); }
 .camp-home h2 { text-transform: uppercase; }
@@ -201,7 +201,7 @@
   .camp-hero { grid-template-columns: 1fr; }
   .camp-hero-copy { padding: 3rem 1.5rem; }
   .camp-hero-title { max-width: 12ch; font-size: clamp(5rem, 15vw, 8rem); }
-  .camp-hero-photo { min-height: 350px; border-left: 0; border-top: 2px solid #252720; }
+  .camp-hero-photo { min-height: 350px; border-left: 0; border-top: 2px solid #1A2A1A; }
   .camp-hero-photo > img { object-position: center 60%; }
   .camp-hero-tagline { max-width: 30rem; }
   .camp-wind-stamp { width: 72px; height: 72px; top: 1.25rem; right: 1.25rem; }

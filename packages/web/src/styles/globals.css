@@ -41,33 +41,33 @@
   button:focus-visible { outline: 2px solid var(--color-terracotta); outline-offset: 2px; border-radius: 0.125rem; }
 
   :root {
-    --color-cream: #FFF4DF;
-    --color-sun: #F3CC61;
-    --color-rust: #B44229;
-    --color-night: #232722;
-    --color-cream-warm: #F3E4C9;
-    --color-ink: #252720;
-    --color-ink-rgb: 37, 39, 32;
+    --color-cream: #F5EFE0;
+    --color-sun: #C9A84C;
+    --color-rust: #2D5A3D;
+    --color-night: #1A2214;
+    --color-cream-warm: #E8DCC6;
+    --color-ink: #1A2A1A;
+    --color-ink-rgb: 26, 42, 26;
     --color-ink-soft: #55554D;
     --color-ink-faint: #706E63;
-    --color-gold: #B44229;
-    --color-gold-muted: #B44229;
-    --color-terracotta: #B44229;
-    --color-terracotta-rgb: 180, 66, 41;
-    --color-gold-rgb: 180, 66, 41;
-    --color-cream-rgb: 255, 244, 223;
-    --color-sage: #B44229;
-    --color-sage-soft: #D77B5D;
-    --color-sage-pale: #EAB69A;
-    --color-sage-rgb: 180, 66, 41;
+    --color-gold: #2D5A3D;
+    --color-gold-muted: #2D5A3D;
+    --color-terracotta: #2D5A3D;
+    --color-terracotta-rgb: 45, 90, 61;
+    --color-gold-rgb: 45, 90, 61;
+    --color-cream-rgb: 245, 239, 224;
+    --color-sage: #2D5A3D;
+    --color-sage-soft: #4A7C59;
+    --color-sage-pale: #86B596;
+    --color-sage-rgb: 45, 90, 61;
     --color-warm-border: #D3C3A5;
     --color-line-rgb: 211, 195, 165;
-    --color-tan-50: 255, 244, 223;
-    --color-surface: #FFFBF1;
-    --color-surface-alt: #F3E4C9;
+    --color-tan-50: 245, 239, 224;
+    --color-surface: #FBF8F0;
+    --color-surface-alt: #E8DCC6;
     --color-success: #2e7d32;
-    --color-warning: #C58B2A;
-    --color-error: #A85C3C;
+    --color-warning: #A77B16;
+    --color-error: #3F6B4A;
     --color-info: #244D61;
     --section-gap: clamp(40px, 6vh, 72px);
     --section-gap-sm: clamp(28px, 4vh, 48px);
@@ -75,26 +75,26 @@
   }
 
   .dark {
-    --color-cream: #20231F;
-    --color-cream-warm: #2A2D27;
-    --color-ink: #FFF4DF;
-    --color-ink-rgb: 255, 244, 223;
+    --color-cream: #141A10;
+    --color-cream-warm: #20261C;
+    --color-ink: #F5EFE0;
+    --color-ink-rgb: 245, 239, 224;
     --color-ink-soft: #DDD2BD;
     --color-ink-faint: #B1AD9F;
-    --color-gold: #F3CC61;
-    --color-gold-muted: #F3CC61;
-    --color-terracotta: #EE9574;
+    --color-gold: #C9A84C;
+    --color-gold-muted: #C9A84C;
+    --color-terracotta: #5A9270;
     --color-terracotta-rgb: 238, 149, 116;
     --color-gold-rgb: 243, 204, 97;
     --color-cream-rgb: 32, 35, 31;
-    --color-sage: #D77B5D;
+    --color-sage: #4A7C59;
     --color-warm-border: #494C40;
     --color-line-rgb: 73, 76, 64;
     --color-tan-50: 32, 35, 31;
-    --color-surface: #2A2D27;
+    --color-surface: #20261C;
     --color-surface-alt: #30342C;
     --color-success: #4caf50;
-    --color-warning: #e0a82e;
+    --color-warning: #C9A84C;
     --color-error: #e05a4f;
     --color-info: #5a8fa8;
   }
@@ -224,14 +224,14 @@
   --admin-silver-sage: #B7BCA9;
   --admin-parchment: #F2E8D8;
   --admin-parchment-soft: #E9DDC9;
-  --admin-brass: #B88A45;
-  --admin-brass-soft: #C0964B;
+  --admin-brass: #A77B16;
+  --admin-brass-soft: #C9A84C;
   --admin-faded-ink: #C8C0AD;
   --admin-ink: #2A211B;
   --admin-muted: #6B6255;
   --admin-border: rgba(72, 92, 76, 0.32);
   --admin-border-dark: rgba(200, 192, 173, 0.18);
-  --admin-warning: #A85C3C;
+  --admin-warning: #3F6B4A;
 
   --color-cream: var(--admin-parchment);
   --color-cream-warm: var(--admin-parchment-soft);
@@ -482,7 +482,7 @@
 .admin-ledger .cta-primary {
   border: 1px solid rgba(184, 138, 69, 0.56);
   border-radius: 0.375rem;
-  background: linear-gradient(180deg, #C0964B, #A97735);
+  background: linear-gradient(180deg, #C9A84C, #A77B16);
   color: #17120E;
   box-shadow: 0 10px 22px rgba(90, 58, 20, 0.18);
 }
@@ -1196,7 +1196,7 @@
 }
 
 .admin-ledger .text-ink,
-.admin-ledger .text-\[\#2C2416\] {
+.admin-ledger .text-\[\#241F14\] {
   color: var(--admin-ink) !important;
 }
 
@@ -1206,7 +1206,7 @@
 }
 
 .admin-ledger .text-gold,
-.admin-ledger .text-\[\#D4AF37\] {
+.admin-ledger .text-\[\#C9A84C\] {
   color: var(--admin-brass) !important;
 }
 
@@ -1229,17 +1229,17 @@
 }
 
 .admin-ledger .bg-gold,
-.admin-ledger .bg-\[\#D4AF37\] {
+.admin-ledger .bg-\[\#C9A84C\] {
   background-color: var(--admin-brass) !important;
 }
 
 .admin-ledger .bg-gold\/5,
-.admin-ledger .bg-\[\#D4AF37\]\/5 {
+.admin-ledger .bg-\[\#C9A84C\]\/5 {
   background-color: rgba(184, 138, 69, 0.1) !important;
 }
 
 .admin-ledger .bg-gold\/10,
-.admin-ledger .bg-\[\#D4AF37\]\/10 {
+.admin-ledger .bg-\[\#C9A84C\]\/10 {
   background-color: rgba(184, 138, 69, 0.14) !important;
 }
 
@@ -1327,7 +1327,7 @@
     background:
       linear-gradient(90deg, rgba(216, 199, 177, 0.96), rgba(239, 228, 210, 0.92)),
       url('/images/texture.webp') center / cover;
-    --color-cream: #2C2416;
+    --color-cream: #241F14;
     --color-cream-rgb: 44, 36, 22;
     --color-tan-50: 60, 50, 38;
   }
@@ -1715,13 +1715,13 @@
  * Intentionally not touched: text-cream and bg-cream opacity variants used
  * as always-light text/fills inside .textured-surface bands; gold accents;
  * anything inside .admin-ledger (already scoped). */
-.dark .bg-cream { background-color: #20231F; }
-.dark .bg-cream-warm { background-color: #2A2D27; }
+.dark .bg-cream { background-color: #141A10; }
+.dark .bg-cream-warm { background-color: #20261C; }
 .dark .bg-white { background-color: #1f241f; }
 .dark .bg-white\/80 { background-color: rgba(31, 36, 31, 0.8); }
-.dark .bg-\[\#F8F2E7\] { background-color: #1f241f; }
+.dark .bg-\[\#FBF8F0\] { background-color: #1f241f; }
 
-.dark .text-ink { color: #FFF4DF; }
+.dark .text-ink { color: #F5EFE0; }
 .dark .text-ink-soft { color: #DDD2BD; }
 .dark .text-ink-faint { color: #B1AD9F; }
 
@@ -1733,12 +1733,12 @@
  * page-surface patches above don't cover, so they stayed light on the dark
  * page. Re-map them to dark surfaces here. Scoped to .member-area so the
  * .admin-ledger theme and the public/auth pages are untouched. Card surfaces
- * lift to #2A2D27 (above the #20231F page) so cards still read as cards. */
+ * lift to #20261C (above the #141A10 page) so cards still read as cards. */
 .dark .member-area .bg-white\/85 { background-color: rgba(31, 36, 31, 0.9); }
 .dark .member-area .bg-cream,
 .dark .member-area .bg-cream\/80,
 .dark .member-area .bg-cream\/70,
-.dark .member-area .bg-cream\/60 { background-color: #2A2D27; }
+.dark .member-area .bg-cream\/60 { background-color: #20261C; }
 .dark .member-area .bg-tan\/40,
 .dark .member-area .bg-tan\/30,
 .dark .member-area .bg-tan\/25 { background-color: rgba(255, 255, 255, 0.07); }
@@ -1749,8 +1749,8 @@
 
 /* Hover states that swap to cream + ink (e.g. .cta-secondary on dark bands)
  * stay readable: bg becomes the new dark-cream, text the new light-ink. */
-.dark .hover\:bg-cream:hover { background-color: #20231F; }
-.dark .hover\:text-ink:hover { color: #FFF4DF; }
+.dark .hover\:bg-cream:hover { background-color: #141A10; }
+.dark .hover\:text-ink:hover { color: #F5EFE0; }
 
 /* `--color-cream`, `--color-cream-rgb`, `--color-tan-50` flip dark for
  * page-surface bg usage, but are also used as always-light parchment text
@@ -1761,9 +1761,9 @@
 .dark .section-contrast,
 .dark .textured-surface,
 .dark .dark-band {
-  --color-cream: #FFF4DF;
-  --color-cream-rgb: 255, 244, 223;
-  --color-tan-50: 255, 244, 223;
+  --color-cream: #F5EFE0;
+  --color-cream-rgb: 245, 239, 224;
+  --color-tan-50: 245, 239, 224;
 }
 
 /* Soft band, dark mode: a green one step lighter than the sage .section-contrast
@@ -1789,51 +1789,51 @@
 /* Charcoal footer with a simple sun-yellow edge. */
 .footer-band,
 .dark .footer-band {
-  background: #232722;
-  border-top: 4px solid #F3CC61;
-  --color-cream: #FFF4DF;
-  --color-cream-rgb: 255, 244, 223;
-  --color-gold: #F3CC61;
-  --color-gold-muted: #F3CC61;
+  background: #1A2214;
+  border-top: 4px solid #C9A84C;
+  --color-cream: #F5EFE0;
+  --color-cream-rgb: 245, 239, 224;
+  --color-gold: #C9A84C;
+  --color-gold-muted: #C9A84C;
 }
 
 /* Dark-mode CTA overrides. cta-primary inverts from ink → gold so it stays
  * the high-contrast "primary action" on dark backgrounds. cta-secondary
  * brightens its border + text so the outline reads on dark surfaces. */
 .dark .cta-primary {
-  background-color: #F3CC61;
+  background-color: #C9A84C;
   color: #17120E;
-  border-color: #F3CC61;
+  border-color: #C9A84C;
 }
 .dark .cta-primary:hover {
-  background-color: #8B6B2E;
-  border-color: #8B6B2E;
-  color: #FFF4DF;
+  background-color: #A77B16;
+  border-color: #A77B16;
+  color: #F5EFE0;
   box-shadow: 0 8px 20px rgba(243, 204, 97, 0.28);
 }
 
 .dark .cta-secondary {
-  color: #FFF4DF;
-  border-color: rgba(255, 244, 223, 0.5);
+  color: #F5EFE0;
+  border-color: rgba(245, 239, 224, 0.5);
 }
 .dark .cta-secondary:hover {
-  background-color: rgba(255, 244, 223, 0.1);
-  border-color: rgba(255, 244, 223, 0.95);
-  color: #FFF4DF;
+  background-color: rgba(245, 239, 224, 0.1);
+  border-color: rgba(245, 239, 224, 0.95);
+  color: #F5EFE0;
 }
 
 .dark .filter-pill {
   color: #DDD2BD;
-  border-color: rgba(255, 244, 223, 0.25);
+  border-color: rgba(245, 239, 224, 0.25);
 }
 .dark .filter-pill:hover {
-  color: #FFF4DF;
-  border-color: rgba(255, 244, 223, 0.6);
+  color: #F5EFE0;
+  border-color: rgba(245, 239, 224, 0.6);
 }
 .dark .filter-pill.is-active,
 .dark .filter-pill[aria-selected="true"] {
-  background-color: #F3CC61;
-  border-color: #F3CC61;
+  background-color: #C9A84C;
+  border-color: #C9A84C;
   color: #17120E;
 }
 
@@ -1850,8 +1850,8 @@ footer .cta-secondary,
 .textured-surface .filter-pill,
 .dark-band .filter-pill,
 footer .filter-pill {
-  color: rgba(255, 244, 223, 0.78);
-  border-color: rgba(255, 244, 223, 0.32);
+  color: rgba(245, 239, 224, 0.78);
+  border-color: rgba(245, 239, 224, 0.32);
 }
 .section-contrast .cta-secondary:hover,
 .textured-surface .cta-secondary:hover,
@@ -1861,9 +1861,9 @@ footer .cta-secondary:hover,
 .textured-surface .filter-pill:hover,
 .dark-band .filter-pill:hover,
 footer .filter-pill:hover {
-  background-color: rgba(255, 244, 223, 0.1);
-  border-color: rgba(255, 244, 223, 0.75);
-  color: #FFF4DF;
+  background-color: rgba(245, 239, 224, 0.1);
+  border-color: rgba(245, 239, 224, 0.75);
+  color: #F5EFE0;
 }
 .section-contrast .filter-pill.is-active,
 .section-contrast .filter-pill[aria-selected="true"],
@@ -1890,16 +1890,16 @@ footer .filter-pill[aria-selected="true"] {
 .section-contrast--soft .filter-pill:hover {
   background-color: rgba(44, 36, 22, 0.06);
   border-color: rgba(44, 36, 22, 0.55);
-  color: #2C2416;
+  color: #241F14;
 }
 .dark .section-contrast--soft .filter-pill {
-  color: rgba(255, 244, 223, 0.78);
-  border-color: rgba(255, 244, 223, 0.32);
+  color: rgba(245, 239, 224, 0.78);
+  border-color: rgba(245, 239, 224, 0.32);
 }
 .dark .section-contrast--soft .filter-pill:hover {
-  background-color: rgba(255, 244, 223, 0.1);
-  border-color: rgba(255, 244, 223, 0.75);
-  color: #FFF4DF;
+  background-color: rgba(245, 239, 224, 0.1);
+  border-color: rgba(245, 239, 224, 0.75);
+  color: #F5EFE0;
 }
 
 /* iOS Safari auto-zooms the page when a focused input renders under 16px and
