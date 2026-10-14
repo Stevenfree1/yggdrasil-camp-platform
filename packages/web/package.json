@@ -8,7 +8,7 @@
     "postinstall": "cd ../database && npx prisma generate",
     "dev": "next dev -p 3006",
     "prestart": "node scripts/ensure-next-build.mjs",
-    "start": "next start",
+    "start": "next start -p 3006",
     "smoke:deploy": "node scripts/smoke-deploy.mjs",
     "lint": "next lint",
     "test": "jest",

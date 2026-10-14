@@ -28,3 +28,9 @@ Fork of amirhjalali/camp-platform, rebranded to Camp Yggdrasil.
 - Nav mark is low-res (140px badge); swap in a clean square Yggdrasil logo for crispness
 - FAQ / resources / member-faq.config.ts left generic
 - Hosting (Mac mini Docker or VPS) — decide after preview
+
+## Role in the member journey (decided 2026-10-14)
+TWO systems, no overlap:
+- **yggdrasil.camp** (static, Cloudflare Pages) = public front: story, sound journey, applications -> andromeda@ + Google Sheet.
+- **This app** = members-only hub: login, dues, shifts, lodging, announcements, admin/roster/season/money. Public landing + /apply are redirected out (see next.config.js redirects). Intended domain: hub.yggdrasil.camp.
+Flow: discover+apply on yggdrasil.camp -> you accept -> create their account here -> they log in for dues/shifts/etc.
