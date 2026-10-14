@@ -16,8 +16,9 @@ import {
   Menu,
   X,
   ArrowLeft,
+  ShieldCheck,
 } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth, hasAdminAccess } from '../../contexts/AuthContext';
 import { getCampConfig } from '../../lib/config';
 
 const campShortName = getCampConfig().shortName;
@@ -111,6 +112,21 @@ export function MemberPortalNav() {
                 </Link>
               );
             })}
+            {hasAdminAccess(user) && (
+              <>
+                <span className="mx-1 h-5 w-px bg-tan/40" aria-hidden="true" />
+                <Link
+                  href="/admin"
+                  className={`group relative flex items-center justify-center gap-1.5 px-3 py-2 rounded-full text-xs font-medium transition-colors whitespace-nowrap ${
+                    pathname.startsWith('/admin') ? 'text-gold' : 'text-ink-soft hover:text-gold'
+                  }`}
+                >
+                  <span className="absolute inset-0 rounded-full bg-gold/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
+                  <ShieldCheck className="relative z-10 h-3.5 w-3.5" />
+                  <span className="relative z-10">Admin</span>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile hamburger + current page label */}
@@ -177,6 +193,19 @@ export function MemberPortalNav() {
                 </Link>
               );
             })}
+            {hasAdminAccess(user) && (
+              <>
+                <div className="my-1 h-px bg-tan/30" aria-hidden="true" />
+                <Link
+                  href="/admin"
+                  onClick={() => setMobileNavOpen(false)}
+                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-ink-soft hover:text-gold transition-colors"
+                >
+                  <ShieldCheck className="h-4 w-4" />
+                  Admin
+                </Link>
+              </>
+            )}
           </div>
         </motion.div>
       )}

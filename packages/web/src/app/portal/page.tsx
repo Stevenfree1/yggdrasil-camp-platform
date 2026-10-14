@@ -207,21 +207,21 @@ export default function PortalDashboard() {
 
   return (
     <div className="space-y-5">
-      <section className="relative overflow-hidden rounded-lg border border-sage/20 bg-ink text-cream shadow-[0_24px_70px_rgba(58,33,31,0.14)]">
-        <div className="absolute inset-0 bg-[url('/images/texture.webp')] bg-cover bg-center opacity-20" aria-hidden="true" />
+      <section className="relative overflow-hidden rounded-lg border border-[#2f5a42]/50 bg-[#0f2a1e] text-[#f5e6c8] shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
+        <div className="absolute inset-0 bg-[url('/images/texture.webp')] bg-cover bg-center opacity-15" aria-hidden="true" />
         <div className="relative grid lg:grid-cols-[minmax(0,1fr)_340px]">
           <div className="p-5 sm:p-7">
-            <span className="inline-block rounded-full border border-gold/35 bg-gold/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-gold">
+            <span className="inline-block rounded-full border border-[#e8c56a]/60 bg-[#e8c56a]/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#f0d488]">
               {seasonName} · {statusLabel}
             </span>
 
-            <h1 className="mt-4 text-display-thin text-3xl leading-[1.08] text-cream sm:text-4xl lg:text-5xl">
+            <h1 className="mt-4 text-display-thin text-3xl leading-[1.08] text-[#f5e6c8] sm:text-4xl lg:text-5xl">
               Welcome back, {user.playaName || user.name}
             </h1>
             {daysToBurn !== null && daysToBurn > 0 && (
               <p className="mt-4 flex items-baseline gap-2.5">
                 <span className="font-display text-3xl leading-none text-gold sm:text-4xl">{daysToBurn}</span>
-                <span className="text-xs uppercase tracking-[0.18em] text-cream/75 sm:text-sm">
+                <span className="text-xs uppercase tracking-[0.18em] text-[#f5e6c8]/80 sm:text-sm">
                   {daysToBurn === 1 ? 'day until the Man burns' : 'days until the Man burns'}
                 </span>
               </p>
