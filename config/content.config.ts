@@ -26,8 +26,8 @@ export const contentConfig: ContentConfig = {
     description:
       'A hand-raised world-tree that casts real shade, a glade to gather in, and a circle that builds it together and strikes it together, leaving no trace.',
     image: {
-      src: '/images/hero.webp',
-      alt: `${camp} under the world-tree at golden hour on the playa`,
+      src: '/images/hero.jpg',
+      alt: `The Yggdrasil world-tree`,
     },
     cta: {
       primary: { text: 'Apply to join', link: '/apply', icon: 'arrow-right' },
@@ -47,14 +47,14 @@ export const contentConfig: ContentConfig = {
           title: 'The world-tree',
           description:
             'A hand-built tree of steel and canopy that throws real shade over the glade. Our landmark and our shelter, raised by the whole camp.',
-          image: { src: '/images/camp-day.webp', alt: 'The world-tree casting shade over the glade' },
+          image: { src: '/images/camp-day.jpg', alt: 'The Yggdrasil world-tree' },
           icon: 'sun',
         },
         {
           title: 'The glade',
           description:
             'Rugs, low light, and shade deep enough to rest under. Runes to draw, intentions tied to the branches, open to everyone walking by.',
-          image: { src: '/images/lounge.webp', alt: 'Rugs and low light in the shaded glade' },
+          image: { src: '/images/lounge.jpg', alt: 'The Nordic forest glade at The Borderland' },
           icon: 'book-open',
         },
         {
@@ -96,7 +96,7 @@ export const contentConfig: ContentConfig = {
     closing: {
       title: 'Come build it with us',
       description:
-        'Whether this is your first burn or your fifteenth, if you want to help raise a tree and hold a circle where people feel met, we would love to hear from you.',
+        "Whether this is your first burn or your fifteenth, if you want to help raise a tree and hold a circle where people feel met, we would love to hear from you. And because nothing grows on the playa, our gift reaches past it: we plant trees around the world in the camp's name.",
       image: { src: '/images/camp-night.webp', alt: `${camp} lit up at night under the tree` },
       cta: {
         primary: { text: 'Apply to join', link: '/apply', icon: 'arrow-right' },
@@ -106,9 +106,7 @@ export const contentConfig: ContentConfig = {
   },
 
   navigation: {
-    lockupSubtitle: campConfig.foundingYear
-      ? `Burning Man theme camp, est. ${campConfig.foundingYear}`
-      : 'Burning Man theme camp',
+    lockupSubtitle: 'Sprung from the Nordic forest at The Borderland',
     items: [
       { label: 'Home', href: '/' },
       { label: 'Apply', href: '/apply' },

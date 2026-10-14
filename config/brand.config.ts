@@ -63,6 +63,6 @@ export const brandConfig: BrandConfig = {
   assets: {
     logo: '/images/brand/yggdrasil-mark.png', logoLight: '/images/brand/yggdrasil-mark.png',
     logoDark: '/images/brand/yggdrasil-mark.png', favicon: '/icon.png',
-    ogImage: '/images/hero.webp', heroBackground: '/images/hero.webp',
+    ogImage: '/images/hero.jpg', heroBackground: '/images/hero.jpg',
   },
 };
